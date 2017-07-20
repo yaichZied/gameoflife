@@ -12,12 +12,9 @@ pipeline {
       steps {
         echo 'building'
         withSonarQubeEnv {
-                      # required metadata
             sonar.projectKey=Nimbu
             sonar.projectName=Nimbu
             sonar.projectVersion=1.0
-
-            # path to source directories (required)
             sonar.sources= /var/lib/jenkins/workspace/$JOB_NAME
         }
       }
