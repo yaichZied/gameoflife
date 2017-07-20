@@ -6,12 +6,6 @@ pipeline {
         echo 'waiting 6 seconds ...'
         sleep(unit: 'SECONDS', time: 6)
         git(poll: true, url: 'https://github.com/yaichZied/gameoflife.git', branch: 'non-functional_pipeline', changelog: true)
-        script {
-          triggers {
-            cron('* * * * *')
-          }
-        }
-        
       }
     }
     stage('Build') {
