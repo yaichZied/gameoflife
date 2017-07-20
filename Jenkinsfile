@@ -4,6 +4,8 @@ pipeline {
     stage('Initialize') {
       steps {
         echo 'Initializing'
+        timeout(unit: 'DAYS', time: 50)
+        deleteDir()
       }
     }
     stage('Build') {
