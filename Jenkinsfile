@@ -1,5 +1,11 @@
 pipeline {
   agent any
+  withSonarQubeEnv {
+            sonar.projectKey=Nimbu
+            sonar.projectName=Nimbu
+            sonar.projectVersion=1.0
+            sonar.sources= /var/lib/jenkins/workspace/$JOB_NAME
+        }
   stages {
     stage('Initialize') {
       steps {
@@ -11,12 +17,6 @@ pipeline {
     stage('Build') {
       steps {
         echo 'building'
-        withSonarQubeEnv {
-            sonar.projectKey=Nimbu
-            sonar.projectName=Nimbu
-            sonar.projectVersion=1.0
-            sonar.sources= /var/lib/jenkins/workspace/$JOB_NAME
-        }
       }
     }
     stage('Report') {
