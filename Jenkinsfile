@@ -1,11 +1,13 @@
 pipeline {
   agent any
+  stage('SonarQube analysis') {
   withSonarQubeEnv {
             sonar.projectKey=Nimbu
             sonar.projectName=Nimbu
             sonar.projectVersion=1.0
             sonar.sources= /var/lib/jenkins/workspace/$JOB_NAME
         }
+  }
   stages {
     stage('Initialize') {
       steps {
