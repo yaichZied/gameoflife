@@ -19,7 +19,5 @@ pipeline {
       }
     }
   }
-  triggers {
-    cron('* * * * *')
-  }
+ triggers { pollSCM('* * * * *') }
 }
