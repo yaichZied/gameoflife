@@ -1,0 +1,5 @@
+projectKey=com.wakaleo.gameoflife:gameoflife
+serverUrl=http://localhost:9000
+dashboardUrl=http://localhost:9000/dashboard/index/com.wakaleo.gameoflife:gameoflife
+ceTaskId=AV0YoIz-wfMe6_yMTE-s
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AV0YoIz-wfMe6_yMTE-s
