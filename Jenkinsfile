@@ -1,13 +1,6 @@
 pipeline {
   agent any
-  stage('SonarQube analysis') {
-  withSonarQubeEnv {
-            sonar.projectKey=Nimbu
-            sonar.projectName=Nimbu
-            sonar.projectVersion=1.0
-            sonar.sources= /var/lib/jenkins/workspace/$JOB_NAME
-        }
-  }
+  
   stages {
     stage('Initialize') {
       steps {
@@ -16,6 +9,14 @@ pipeline {
         git(poll: true, url: 'https://github.com/yaichZied/gameoflife.git', branch: 'non-functional_pipeline', changelog: true)
       }
     }
+    stage('SonarQube analysis') {
+  withSonarQubeEnv {
+            sonar.projectKey=Nimbu
+            sonar.projectName=Nimbu
+            sonar.projectVersion=1.0
+            sonar.sources= /var/lib/jenkins/workspace/$JOB_NAME
+        }
+  }
     stage('Build') {
       steps {
         echo 'building'
