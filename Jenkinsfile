@@ -15,6 +15,11 @@ pipeline {
         echo 'building'
       }
     }
+    stage('Builded') {
+      steps {
+        echo 'buildingd'
+      }
+    }
     stage('Report') {
       steps {
         echo 'Reporting'
