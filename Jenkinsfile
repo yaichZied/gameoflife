@@ -10,13 +10,16 @@ pipeline {
       }
     }
     stage('SonarQube analysis') {
+            steps {
+
   withSonarQubeEnv {
             sonar.projectKey=Nimbu
             sonar.projectName=Nimbu
             sonar.projectVersion=1.0
             sonar.sources= /var/lib/jenkins/workspace/$JOB_NAME
         }
-  }
+            }
+            }
     stage('Build') {
       steps {
         echo 'building'
