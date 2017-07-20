@@ -10,15 +10,16 @@ pipeline {
       }
     }
     stage('SonarQube analysis') {
-            steps {
+           
 
   withSonarQubeEnv {
-            sonar.projectKey=Nimbu
-            sonar.projectName=Nimbu
-            sonar.projectVersion=1.0
-            sonar.sources= /var/lib/jenkins/workspace/$JOB_NAME
+    sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.3.0.603:sonar ' +
+            '-Dsonar.projectKey=Nimbu'+
+            '-Dsonar.projectName=Nimbu'+
+            '-Dsonar.projectVersion=1.0'+
+            '-Dsonar.sources= /var/lib/jenkins/workspace/$JOB_NAME'
         }
-            }
+            
             }
     stage('Build') {
       steps {
