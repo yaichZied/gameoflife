@@ -1,6 +1,5 @@
 pipeline {
   agent any
-  
   stages {
     stage('Initialize') {
       steps {
@@ -9,7 +8,6 @@ pipeline {
         git(poll: true, url: 'https://github.com/yaichZied/gameoflife.git', branch: 'non-functional_pipeline', changelog: true)
       }
     }
-   
     stage('Build') {
       steps {
         echo 'building'
@@ -18,6 +16,7 @@ pipeline {
     stage('Builded') {
       steps {
         echo 'buildingd'
+        echo 'k_io'
       }
     }
     stage('Report') {
