@@ -5,7 +5,7 @@ pipeline {
       steps {
         echo 'waiting 6 seconds ...'
         sleep(unit: 'SECONDS', time: 6)
-        git(poll: true, url: 'https://github.com/yaichZied/gameoflife.git', branch: 'non-functional_pipeline', changelog: true)
+        git(poll: true, url: 'https://github.com/yaichZied/gameoflife.git', branch: 'pipelineEditorBranch', changelog: true)
       }
     }
     stage('Build') {
