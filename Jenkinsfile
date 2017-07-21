@@ -10,12 +10,12 @@ pipeline {
       }
     }
     stage('Abort if stuck') {
-       
+      steps {
           if (!continueBuild) {
             currentBuild.result = 'ABORTED'
             error('Stopping early…')
         }
-       
+      }
     }
     stage('Build') {
       steps {
