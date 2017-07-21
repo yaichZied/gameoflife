@@ -8,24 +8,17 @@ pipeline {
         git(poll: true, url: 'https://github.com/yaichZied/gameoflife.git', branch: 'pipelineEditorBranch', changelog: true)
       }
     }
-    stage('Abort if stuck') {
+    stage('Build') {
       steps {
-        sh '''if (!continueBuild) {
-            currentBuild.result = 'ABORTED'
-            error('Stopping early…')'''
-        }
+        echo 'building'
+        sh 'mvn install'
       }
-      stage('Build') {
-        steps {
-          echo 'building'
-          sh 'mvn install'
-        }
-      }
-      stage('Report') {
-        steps {
-          echo 'Reporting'
-          junit(testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true, healthScaleFactor: 1)
-        }
+    }
+    stage('Report') {
+      steps {
+        echo 'Reporting'
+        junit(testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true, healthScaleFactor: 1)
       }
     }
   }
+}
