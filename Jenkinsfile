@@ -6,7 +6,6 @@ pipeline {
         echo 'waiting 6 seconds ...'
         sleep(unit: 'SECONDS', time: 6)
         git(poll: true, url: 'https://github.com/yaichZied/gameoflife.git', branch: 'pipelineEditorBranch', changelog: true)
-        timestamps()
       }
     }
     stage('Abort if stuck') {
