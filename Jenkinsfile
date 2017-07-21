@@ -11,22 +11,22 @@ pipeline {
     }
     stage('Abort if stuck') {
       steps {
-          sh '''if (!continueBuild) {
-            currentBuild.result = \'ABORTED\'
-            error(\'Stopping early…\')'''
+        sh '''if (!continueBuild) {
+            currentBuild.result = 'ABORTED'
+            error('Stopping early…')'''
+        }
       }
-    }
-    stage('Build') {
-      steps {
-        echo 'building'
-        sh 'mvn install'
+      stage('Build') {
+        steps {
+          echo 'building'
+          sh 'mvn install'
+        }
       }
-    }
-    stage('Report') {
-      steps {
-        echo 'Reporting'
-        junit(testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true, healthScaleFactor: 1)
+      stage('Report') {
+        steps {
+          echo 'Reporting'
+          junit(testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true, healthScaleFactor: 1)
+        }
       }
     }
   }
-}
