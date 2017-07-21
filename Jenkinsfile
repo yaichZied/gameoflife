@@ -11,9 +11,9 @@ pipeline {
     }
     stage('Abort if stuck') {
       steps {
-          if (!continueBuild) {
+         sh ' if (!continueBuild) {
             currentBuild.result = 'ABORTED'
-            error('Stopping early…')
+            error('Stopping early…')'
         }
       }
     }
