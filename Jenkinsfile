@@ -11,17 +11,13 @@ pipeline {
     stage('Build') {
       steps {
         echo 'building'
-      }
-    }
-    stage('Builded') {
-      steps {
-        echo 'buildingd'
-        echo 'k_io'
+        sh 'mvn install'
       }
     }
     stage('Report') {
       steps {
         echo 'Reporting'
+        junit(testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true, healthScaleFactor: 1)
       }
     }
   }
