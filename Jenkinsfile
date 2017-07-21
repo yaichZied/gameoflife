@@ -13,6 +13,12 @@ pipeline {
         }
       }
     }
+    stage('Abort if stuck') {
+          if (!continueBuild) {
+            currentBuild.result = 'ABORTED'
+            error('Stopping early…')
+        }
+    }
     stage('Build') {
       steps {
         echo 'building'
