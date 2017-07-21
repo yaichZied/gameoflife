@@ -14,7 +14,6 @@ pipeline {
           sh '''if (!continueBuild) {
             currentBuild.result = \'ABORTED\'
             error(\'Stopping early…\')'''
-        }
       }
     }
     stage('Build') {
