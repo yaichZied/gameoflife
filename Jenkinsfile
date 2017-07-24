@@ -30,9 +30,6 @@ pipeline {
     maven 'Maven 3.3.9'
     jdk 'jdk8'
   }
-  environment {
-    VERSION = readMavenPom().getVersion()
-  }
   options {
     buildDiscarder(logRotator(numToKeepStr: '10'))
     timeout(time: 60, unit: 'MINUTES')
