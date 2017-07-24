@@ -15,6 +15,7 @@ pipeline {
     stage('Build') {
       steps {
         echo 'building'
+        echo "$VERSION"
         sh 'mvn install'
       }
     }
@@ -32,5 +33,8 @@ pipeline {
   options {
     buildDiscarder(logRotator(numToKeepStr: '10'))
     timeout(time: 60, unit: 'MINUTES')
+  }
+  environment {
+      VERSION = readMavenPom().getVersion()
   }
 }
