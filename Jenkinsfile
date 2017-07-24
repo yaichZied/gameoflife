@@ -30,7 +30,7 @@ pipeline {
     jdk 'jdk8'
   }
   options {
-    buildDiscarder(logRotator(numToKeepStr:'10'))
+    buildDiscarder(logRotator(numToKeepStr: '10'))
     timeout(time: 60, unit: 'MINUTES')
   }
 }
