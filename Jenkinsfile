@@ -25,6 +25,7 @@ pipeline {
       steps {
         echo 'Reporting'
         junit(testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true, healthScaleFactor: 1)
+        archiveArtifacts(artifacts: '**/target/*.jar', fingerprint: true)
       }
     }
   }
