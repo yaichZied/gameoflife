@@ -1,9 +1,5 @@
 pipeline {
   agent any
-  tools {
-        maven 'Maven 3.3.9'
-        jdk 'jdk8'
-  }
   stages {
     stage('Initialize') {
       steps {
@@ -15,7 +11,7 @@ pipeline {
                     echo "M2_HOME = ${M2_HOME}"
                 '''
       }
-    } 
+    }
     stage('Build') {
       steps {
         echo 'building'
@@ -28,5 +24,9 @@ pipeline {
         junit(testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true, healthScaleFactor: 1)
       }
     }
+  }
+  tools {
+    maven 'Maven 3.3.9'
+    jdk 'jdk8'
   }
 }
