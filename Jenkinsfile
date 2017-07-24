@@ -15,8 +15,8 @@ pipeline {
     stage('Build') {
       steps {
         echo 'building'
-        echo '"$VERSION"'
         sh 'mvn install'
+        echo '$VERSION'
       }
     }
     stage('Report') {
