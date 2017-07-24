@@ -20,7 +20,7 @@ pipeline {
         sh 'mvn install'
         sh 'echo "VERSION = $VERSION"'
       }
-    
+    }
     stage('Report') {
       steps {
         echo 'Reporting'
