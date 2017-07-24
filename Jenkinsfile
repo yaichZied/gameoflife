@@ -18,7 +18,7 @@ pipeline {
       steps {
         sh 'mvn install'
         sh 'echo "VERSION = $VERSION"'
-        sh 'echo " Running ${env.BUILD_ID} on ${env.JENKINS_URL}"'
+        echo 'Running ${env.BUILD_ID} on ${env.JENKINS_URL}'
       }
     }
     stage('Report') {
