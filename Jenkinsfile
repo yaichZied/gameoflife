@@ -16,7 +16,7 @@ pipeline {
     }
     stage('Build') {
       steps {
-        echo 'building'
+        echo 'Running ${env.BUILD_ID} on ${env.JENKINS_URL}'
         sh 'mvn install'
         echo '$VERSION'
       }
