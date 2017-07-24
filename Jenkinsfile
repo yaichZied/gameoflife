@@ -12,7 +12,6 @@ pipeline {
                     echo "M2_HOME = ${M2_HOME}"
                 '''
         sh 'mvn \'clean\''
-        sh 'mvn \'deploy\''
       }
     }
     stage('Build') {
