@@ -4,14 +4,15 @@ pipeline {
     stage('Initialize') {
       steps {
         echo 'waiting 6 seconds ...'
-        echo '${$VERSION}'
+        echo '${VERSION}'
         sleep(unit: 'SECONDS', time: 6)
         git(poll: true, url: 'https://github.com/yaichZied/gameoflife.git', branch: 'pipelineEditorBranch', changelog: true)
         sh '''
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
                 '''
-        sh 'mvn \'clean install\''
+        sh 'mvn \'clean\''
+        sh 'mvn \'deploy\''
       }
     }
     stage('Build') {
