@@ -20,14 +20,7 @@ pipeline {
         sh 'mvn install'
         sh 'echo "VERSION = $VERSION"'
       }
-    }
-    stage('SonarQube analysis') {
-      steps {
-        withSonarQubeEnv('sonar') {
-          sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
-        }
-      }
-    }
+    
     stage('Report') {
       steps {
         echo 'Reporting'
