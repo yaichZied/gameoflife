@@ -12,7 +12,7 @@ pipeline {
                 '''
         sh 'mvn \'clean\''
         sh 'echo " VERSION = ${VERSION}"'
-        sh 'echo ${env.BRANCH_NAME}'
+        sh 'env'
       }
     }
     stage('Build') {
