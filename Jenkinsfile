@@ -19,7 +19,10 @@ pipeline {
       steps {
         sh 'mvn install'
         sh 'echo "VERSION = $VERSION"'
-        sh '${env.BUILD_ID}'
+        node(label: 'No') {
+          sh 'echo "BUILD= ${env.BUILD_ID}"'
+        }
+        
       }
     }
     stage('Report') {
