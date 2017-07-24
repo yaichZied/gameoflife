@@ -1,10 +1,6 @@
 pipeline {
   agent any
-  node('vagrant-slave') {
-        env.JAVA_HOME="${tool 'jdk-8u45'}"
-        env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
-        sh 'java -version' 
-  }
+  
   stages {
     stage('Initialize') {
       steps {
@@ -13,6 +9,15 @@ pipeline {
         git(poll: true, url: 'https://github.com/yaichZied/gameoflife.git', branch: 'pipelineEditorBranch', changelog: true)
       }
     }
+    
+    stage('vagrant-slave') {
+      steps{
+        env.JAVA_HOME="${tool 'jdk-8u45'}"
+        env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
+        sh 'java -version' 
+      }
+    }
+    
     stage('Build') {
       steps {
         echo 'building'
