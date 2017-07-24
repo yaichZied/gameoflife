@@ -20,7 +20,7 @@ pipeline {
         sh 'mvn install'
         sh 'echo "VERSION = $VERSION"'
         node(label: 'No') {
-          sh 'echo "BUILD= ${env.BUILD_ID}"'
+          sh '${env.BUILD_ID}'
         }
         
       }
