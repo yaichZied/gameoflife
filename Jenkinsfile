@@ -2,10 +2,9 @@ pipeline {
   agent any
   stages {
     stage('Initialize') {
-      def pom = readMavenPom file: 'pom.xml'
       steps {
         echo 'waiting 6 seconds ...'
-        echo '${pom.version}'
+        echo $VERSION
         sleep(unit: 'SECONDS', time: 6)
         git(poll: true, url: 'https://github.com/yaichZied/gameoflife.git', branch: 'pipelineEditorBranch', changelog: true)
         sh '''
