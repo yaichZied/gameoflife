@@ -15,7 +15,7 @@ pipeline {
     stage('Build') {
       steps {
         echo 'building'
-        echo "$VERSION"
+        echo '"$VERSION"'
         sh 'mvn install'
       }
     }
@@ -30,11 +30,11 @@ pipeline {
     maven 'Maven 3.3.9'
     jdk 'jdk8'
   }
+  environment {
+    VERSION = readMavenPom().getVersion()
+  }
   options {
     buildDiscarder(logRotator(numToKeepStr: '10'))
     timeout(time: 60, unit: 'MINUTES')
-  }
-  environment {
-      VERSION = readMavenPom().getVersion()
   }
 }
