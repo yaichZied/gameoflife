@@ -11,7 +11,7 @@ pipeline {
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
                 '''
-        sh 'mvn \'clean deploy\''
+        sh 'mvn \'clean install\''
       }
     }
     stage('Build') {
