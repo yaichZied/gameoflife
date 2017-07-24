@@ -2,8 +2,10 @@ pipeline {
   agent any
   stages {
     stage('Initialize') {
+      def pom = readMavenPom file: 'pom.xml'
       steps {
         echo 'waiting 6 seconds ...'
+        echo '${pom.version}'
         sleep(unit: 'SECONDS', time: 6)
         git(poll: true, url: 'https://github.com/yaichZied/gameoflife.git', branch: 'pipelineEditorBranch', changelog: true)
         sh '''
@@ -11,16 +13,6 @@ pipeline {
                     echo "M2_HOME = ${M2_HOME}"
                 '''
       }
-    
-    def server = Artifactory.server "SERVER_ID"
-    def rtMaven = Artifactory.newMavenBuild()
-    def buildInfo  
-        rtMaven.tool = "Maven-3.3.9"
-        rtMaven.deployer releaseRepo:'libs-release-local', snapshotRepo:'libs-snapshot-local', server: server
-        rtMaven.resolver releaseRepo:'libs-release', snapshotRepo:'libs-snapshot', server: server
-        buildInfo = rtMaven.run pom: 'maven-example/pom.xml', goals: 'clean install'
-        server.publishBuildInfo buildInfo
-  
     }
     stage('Build') {
       steps {
