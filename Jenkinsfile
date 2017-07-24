@@ -4,7 +4,6 @@ pipeline {
     stage('Initialize') {
       steps {
         echo 'waiting 6 seconds ...'
-        echo '${VERSION}'
         sleep(unit: 'SECONDS', time: 6)
         git(poll: true, url: 'https://github.com/yaichZied/gameoflife.git', branch: 'pipelineEditorBranch', changelog: true)
         sh '''
@@ -12,13 +11,14 @@ pipeline {
                     echo "M2_HOME = ${M2_HOME}"
                 '''
         sh 'mvn \'clean\''
+        sh 'echo " VERSION = ${VERSION}"'
       }
     }
     stage('Build') {
       steps {
         sh 'mvn install'
-        echo '$VERSION'
-        echo 'Running ${env.BUILD_ID} on ${env.JENKINS_URL}'
+        sh 'echo "VERSION = $VERSION"'
+        sh 'echo " Running ${env.BUILD_ID} on ${env.JENKINS_URL}"'
       }
     }
     stage('Report') {
