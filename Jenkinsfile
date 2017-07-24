@@ -13,10 +13,11 @@ pipeline {
       }
     }
     stage('Build') {
+      def pom = readMavenPom file: 'pom.xml'
       steps {
         echo 'building'
         sh 'mvn install'
-        echo '$VERSION'
+        echo '${pom.version}'
       }
     }
     stage('Report') {
