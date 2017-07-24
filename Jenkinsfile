@@ -15,7 +15,6 @@ pipeline {
         sh 'env'
       }
     }
-    
     stage('Build') {
       steps {
         sh 'mvn install'
@@ -27,6 +26,21 @@ pipeline {
         echo 'Reporting'
         junit(testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true, healthScaleFactor: 1)
         archiveArtifacts(artifacts: '**/target/*.jar', fingerprint: true)
+      }
+    }
+    stage('Audit Qualité') {
+      steps {
+        node(label: 'SonarQube Analysis ') {
+          script {
+            
+            withSonarQubeEnv('My SonarQube Server') {
+              sh 'mvn clean package sonar:sonar'
+            }
+            
+          }
+          
+        }
+        
       }
     }
   }
