@@ -19,6 +19,8 @@ pipeline {
       steps {
         sh 'mvn install'
         sh 'echo "VERSION = $VERSION"'
+        sh 'mvn clean package '
+        cleanWs(cleanWhenSuccess: true, cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true)
       }
     }
     stage('Report') {
