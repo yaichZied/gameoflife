@@ -24,28 +24,20 @@ pipeline {
     }
     stage('SonarQube') {
       steps {
-        parallel(
-          "SonarQube": {
-            script {
-              scannerHome = tool 'sonar'
-              withSonarQubeEnv('sonarServer') {
-                sh "${scannerHome}/bin/sonar-scanner"
-              }
-            }
-            
-            
-          },
-          "JaCoCo": {
-            sh 'mvn clean jacoco:prepare-agent install dependency-check:aggregate -Dformat=XML -DdataDirectory=/var/lib/jenkins/reports/Sec/OWASP-DP/NVDUpdates -DoutputDirectory=target/dependency-check-report.xml sonar:sonar'
-            
+        script {
+          scannerHome = tool 'sonar'
+          withSonarQubeEnv('sonarServer') {
+            sh "${scannerHome}/bin/sonar-scanner"
           }
-        )
+        }
+        
       }
     }
     stage('Report') {
       steps {
         junit(testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true, healthScaleFactor: 1)
         archiveArtifacts(artifacts: '**/target/*.jar', fingerprint: true)
+        input 'Does this Build seems OK ?'
       }
     }
   }
