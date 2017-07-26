@@ -9,7 +9,7 @@ pipeline {
         sh '''
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
-                    echo "JENKINS_HOME = ${env.JENKINS_HOME}"
+                   
                 '''
         sh 'mvn \'clean\''
         sh 'echo " VERSION = ${VERSION}"'
