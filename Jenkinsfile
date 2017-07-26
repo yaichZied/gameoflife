@@ -20,6 +20,7 @@ echo "$JENKINS_HOME"
 '''
         sh 'echo " JENKINS_HOME = ${JENKINS_HOME}"'
         sh 'env'
+        readMavenPom(file: 'pom.xml')
       }
     }
     stage('Build') {
