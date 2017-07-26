@@ -22,6 +22,7 @@ echo "$JENKINS_HOME"
         sh 'env'
         readMavenPom(file: 'pom.xml')
         sh 'env'
+        input 'Should I Continue ?'
       }
     }
     stage('Build') {
