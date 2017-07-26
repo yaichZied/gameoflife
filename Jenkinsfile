@@ -37,7 +37,7 @@ pipeline {
           }
         }
         
-        timeout(time: 1, unit: 'MINUTES') {
+        timeout(time: 2, unit: 'MINUTES') {
           script {
             def qg = waitForQualityGate()
             if (qg.status == 'OK') {
