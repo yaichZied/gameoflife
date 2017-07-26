@@ -28,15 +28,13 @@ pipeline {
         archiveArtifacts(artifacts: '**/target/*.jar', fingerprint: true)
       }
     }
-    stage('Audit Qualité') {
+    stage('Audit Qualite') {
       steps {
-        node(label: 'SonarQube Analysis ') {
-          script {
-            
-            echo 'mvn clean package sonar:sonar'
-            
+        tool(name: 'sonar', type: 'sonarQube')
+        script {
+          withSonarQubeEnv('sonarServer') {
+            sh 'sonar-scanner'
           }
-          
         }
         
       }
