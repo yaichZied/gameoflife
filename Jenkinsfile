@@ -22,13 +22,6 @@ pipeline {
         sh 'mvn clean package '
       }
     }
-    stage('Report') {
-      steps {
-        echo 'Reporting'
-        junit(testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true, healthScaleFactor: 1)
-        archiveArtifacts(artifacts: '**/target/*.jar', fingerprint: true)
-      }
-    }
     stage('SonarQube') {
       steps {
         script {
@@ -38,6 +31,12 @@ pipeline {
           }
         }
         
+      }
+    }
+    stage('Report') {
+      steps {
+        junit(testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true, healthScaleFactor: 1)
+        archiveArtifacts(artifacts: '**/target/*.jar', fingerprint: true)
       }
     }
   }
