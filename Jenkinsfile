@@ -28,13 +28,23 @@ pipeline {
         archiveArtifacts(artifacts: '**/target/*.jar', fingerprint: true)
       }
     }
-    stage('Audit Qualite') {
+    stage('SonarQube') {
       steps {
         script {
           scannerHome = tool 'sonar'
           withSonarQubeEnv('sonarServer') {
             sh "${scannerHome}/bin/sonar-scanner"
           }
+        }
+        
+        timeout(time: 1, unit: 'MINUTES') {
+          script {
+            def qg = waitForQualityGate()
+            if (qg.status != 'OK') {
+              error "Pipeline aborted due to quality gate failure: ${qg.status}"
+            }
+          }
+          
         }
         
       }
