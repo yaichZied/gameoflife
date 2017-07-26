@@ -51,7 +51,7 @@ echo "$JENKINS_HOME"
     stage('Delivery') {
       steps {
         sh '''touch envVars.properties
-echo RELEASE_VERSION=$(echo $POM_VERSION | cut -c1-$(($(echo $POM_VERSION | grep -b -o SNAPSHOT | awk 'BEGIN {FS=":"}{print $1}') - 1))) > envVars.properties'''
+echo RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o SNAPSHOT | awk 'BEGIN {FS=":"}{print $1}') - 1))) > envVars.properties'''
       }
     }
   }
