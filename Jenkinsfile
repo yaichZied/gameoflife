@@ -40,6 +40,12 @@ pipeline {
         input 'Does this Build seems OK ?'
       }
     }
+    stage('Delivery') {
+      steps {
+        sh '''touch envVars.properties
+echo RELEASE_VERSION=$(echo $POM_VERSION | cut -c1-$(($(echo $POM_VERSION | grep -b -o SNAPSHOT | awk 'BEGIN {FS=":"}{print $1}') - 1))) > envVars.properties'''
+      }
+    }
   }
   tools {
     maven 'Maven 3.3.9'
