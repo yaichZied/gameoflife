@@ -9,10 +9,12 @@ pipeline {
         sh '''
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
+echo "${env.JENKINS_HOME}"
                 '''
         sh 'mvn \'clean\''
         sh 'echo " VERSION = ${VERSION}"'
         sh 'env'
+        echo '${env.JENKINS_HOME}'
       }
     }
     stage('Build') {
