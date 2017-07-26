@@ -14,7 +14,7 @@ pipeline {
                 '''
         sh '''mvn 'clean'
 
-echo JENKINS_HOME
+echo $JENKINS_HOME
 
 '''
         sh 'echo " JENKINS_HOME = ${JENKINS_HOME}"'
