@@ -37,11 +37,6 @@ pipeline {
           }
         }
         
-        timeout(time: 2, unit: 'SECONDS') {
-          load 'sonar.groovy'
-        }
-        
-        echo 'clear'
       }
     }
   }
