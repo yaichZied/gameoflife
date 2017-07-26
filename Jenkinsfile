@@ -8,6 +8,7 @@ pipeline {
         git(poll: true, url: 'https://github.com/yaichZied/gameoflife.git', branch: 'pipelineEditorBranch', changelog: true)
         sh '''
                     echo "PATH = ${PATH}"
+                    echo "JENKINS_HOME = ${JENKINS_HOME}"
                     echo "M2_HOME = ${M2_HOME}"
                    
                 '''
