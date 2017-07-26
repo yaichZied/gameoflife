@@ -61,7 +61,7 @@ echo RELEASE_VERSION=$(echo $POM_VERSION | cut -c1-$(($(echo $POM_VERSION | grep
     jdk 'jdk8'
   }
   environment {
-    VERSION = 'readMavenPom().getVersion()'
+    VERSION = readMavenPom().getVersion()
   }
   options {
     buildDiscarder(logRotator(numToKeepStr: '10'))
