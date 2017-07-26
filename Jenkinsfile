@@ -30,10 +30,10 @@ pipeline {
     }
     stage('Audit Qualite') {
       steps {
-        tool(name: 'sonar', type: 'sonarQube')
         script {
+          scannerHome = tool 'sonar'
           withSonarQubeEnv('sonarServer') {
-            sh 'sonar-scanner'
+            sh "${scannerHome}/bin/sonar-scanner"
           }
         }
         
