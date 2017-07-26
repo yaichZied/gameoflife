@@ -33,11 +33,7 @@ pipeline {
         script {
           scannerHome = tool 'sonar'
           withSonarQubeEnv('sonarServer') {
-            sh '${scannerHome}/bin/sonar-scanner' +
-            '-Dsonar.projectKey=Nimbu' +
-            '-Dsonar.projectName=Nimbu' +
-            '-Dsonar.projectVersion=1.1' +
-            '-Dsonar.sources=.'
+            sh "${scannerHome}/bin/sonar-scanner"
           }
         }
         
