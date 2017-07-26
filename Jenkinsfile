@@ -12,7 +12,7 @@ pipeline {
                    
                 '''
         sh 'mvn \'clean\''
-        sh 'echo " VERSION = ${VERSION}"'
+        sh 'echo " JENKINS_HOME = ${JENKINS_HOME}"'
         sh 'env'
         echo '${env.JENKINS_HOME}'
       }
@@ -55,6 +55,7 @@ echo RELEASE_VERSION=$(echo $POM_VERSION | cut -c1-$(($(echo $POM_VERSION | grep
   }
   environment {
     VERSION = 'readMavenPom().getVersion()'
+    JENKINS_HOME = '${env.JENKINS_HOME}'
   }
   options {
     buildDiscarder(logRotator(numToKeepStr: '10'))
