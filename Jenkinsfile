@@ -13,7 +13,11 @@ pipeline {
         sh 'mvn \'clean\''
         sh 'echo " VERSION = ${VERSION}"'
         sh 'env'
-        echo '$JENKINS_HOME'
+        node(label: 'test') {
+          echo '$JENKINS_HOME'
+          sh '$JENKINS_HOME'
+        }
+        
       }
     }
     stage('Build') {
