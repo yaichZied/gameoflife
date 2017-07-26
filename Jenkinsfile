@@ -15,7 +15,7 @@ pipeline {
         sh 'env'
         node(label: 'test') {
           echo '$JENKINS_HOME'
-          sh '$JENKINS_HOME'
+          sh 'echo $JENKINS_HOME'
         }
         
       }
