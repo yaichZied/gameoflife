@@ -37,13 +37,15 @@ pipeline {
           }
         }
         
-        timeout(time: 2, unit: 'MINUTES') {       
+        timeout(time: 2, unit: 'MINUTES') {
           script {
             def qg = waitForQualityGate()
             if (qg.status == 'OK') {
               error "Pipeline aborted due to quality gate failure: ${qg.status}"
             }
           }
+          
+          load 'sonar.groovy'
         }
         
         echo 'clear'
