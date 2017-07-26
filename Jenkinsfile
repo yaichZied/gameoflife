@@ -32,9 +32,9 @@ pipeline {
       steps {
         node(label: 'SonarQube Analysis ') {
           script {
-            withSonarQubeEnv('sonar') {
-              echo 'mvn clean package sonar:sonar'
-            }
+            
+            echo 'mvn clean package sonar:sonar'
+            
           }
           
         }
