@@ -10,6 +10,7 @@ pipeline {
                     echo "PATH = ${PATH}"
                     echo "JENKINS_HOME = ${JENKINS_HOME}"
                     echo "M2_HOME = ${M2_HOME}"
+echo "POM_VERSION = " + readMavenPom().getVersion()
                    
                 '''
         sh '''mvn 'clean'
