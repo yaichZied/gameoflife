@@ -12,7 +12,16 @@ pipeline {
                     echo "M2_HOME = ${M2_HOME}"
                    
                 '''
-        sh 'mvn \'clean\''
+        sh '''mvn 'clean'
+
+echo JENKINS_HOME
+echo $JENKINS_HOME
+echo ${env.JENKINS_HOME}
+
+echo "JENKINS_HOME"
+echo "$JENKINS_HOME"
+echo "${env.JENKINS_HOME}"
+'''
         sh 'echo " JENKINS_HOME = ${JENKINS_HOME}"'
         sh 'env'
       }
