@@ -24,13 +24,22 @@ pipeline {
     }
     stage('SonarQube') {
       steps {
-        script {
-          scannerHome = tool 'sonar'
-          withSonarQubeEnv('sonarServer') {
-            sh "${scannerHome}/bin/sonar-scanner"
+        parallel(
+          "SonarQube": {
+            script {
+              scannerHome = tool 'sonar'
+              withSonarQubeEnv('sonarServer') {
+                sh "${scannerHome}/bin/sonar-scanner"
+              }
+            }
+            
+            
+          },
+          "JaCoCo": {
+            sh 'mvn clean jacoco:prepare-agent install dependency-check:aggregate -Dformat=XML -DdataDirectory=/var/lib/jenkins/reports/Sec/OWASP-DP/NVDUpdates -DoutputDirectory=target/dependency-check-report.xml sonar:sonar'
+            
           }
-        }
-        
+        )
       }
     }
     stage('Report') {
