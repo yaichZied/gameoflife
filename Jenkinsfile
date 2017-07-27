@@ -22,7 +22,7 @@ echo "$JENKINS_HOME"
             input 'Should I Continue ?'
             
           },
-          "tests": {
+          "testing": {
             sh '''touch envVars.properties.groovy
 echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o SNAPSHOT | awk 'BEGIN {FS=":"}{print $1}') - 1))) > envVars.properties.groovy'''
             load 'envVars.properties.groovy'
@@ -30,7 +30,7 @@ echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o 
             script {
               withEnv(['REALEASE_VERSION = load \'envVars.properties.groovy\'']) {
                 echo " $RELEASE_VERSION"
-                env.RELEASE_VERSION= $RELEASE_VERSION
+                env.RELEASE_VERSION= '$RELEASE_VERSION'
                 sh 'env'
               }
             }
