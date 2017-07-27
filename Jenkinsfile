@@ -61,7 +61,7 @@ echo RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o S
   }
   environment {
     VERSION = readMavenPom().getVersion()
-    RELEASE_VERSION = $(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o SNAPSHOT | awk \'BEGIN {FS=":"}{print $1}\') - 1)))
+    RELEASE_VERSION = $(echo ${VERSION} | cut -c1-$(($(echo ${VERSION} | grep -b -o SNAPSHOT | awk \'BEGIN {FS=":"}{print $1}\') - 1)))
   }
   options {
     buildDiscarder(logRotator(numToKeepStr: '10'))
