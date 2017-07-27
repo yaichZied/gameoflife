@@ -27,8 +27,8 @@ echo "$JENKINS_HOME"
           "tests": {
             sh '''touch envVars.properties
 echo RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o SNAPSHOT | awk 'BEGIN {FS=":"}{print $1}') - 1))) > envVars.properties'''
-            load 'envVars.properties'
-            sh 'echo "RELEASE_VERSION = ${RELEASE_VERSION}"'
+            readFile 'envVars.properties'
+            sh 'echo " RELEASE_VERSION = ${RELEASE_VERSION}"'
             
           }
         )
