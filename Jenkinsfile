@@ -3,23 +3,35 @@ pipeline {
   stages {
     stage('Initialize') {
       steps {
-        echo 'waiting 6 seconds ...'
-        sleep(unit: 'SECONDS', time: 6)
-        git(poll: true, url: 'https://github.com/yaichZied/gameoflife.git', branch: 'pipelineEditorBranch', changelog: true)
-        sh '''
+        parallel(
+          "Initialize": {
+            echo 'waiting 6 seconds ...'
+            sleep(unit: 'SECONDS', time: 6)
+            git(poll: true, url: 'https://github.com/yaichZied/gameoflife.git', branch: 'pipelineEditorBranch', changelog: true)
+            sh '''
                     echo "PATH = ${PATH}"
                     echo "JENKINS_HOME = ${JENKINS_HOME}"
                     echo "M2_HOME = ${M2_HOME}"
 echo "VERSION = ${VERSION}"
                               '''
-        sh '''mvn 'clean'
+            sh '''mvn 'clean'
 
 echo "$JENKINS_HOME"
 
 '''
-        sh 'echo " JENKINS_HOME = ${JENKINS_HOME}"'
-        sh 'env'
-        input 'Should I Continue ?'
+            sh 'echo " JENKINS_HOME = ${JENKINS_HOME}"'
+            sh 'env'
+            input 'Should I Continue ?'
+            
+          },
+          "tests": {
+            sh '''touch envVars.properties
+echo RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o SNAPSHOT | awk 'BEGIN {FS=":"}{print $1}') - 1))) > envVars.properties'''
+            libraryResource 'envVars.properties'
+            sh 'echo "RELEASE_VERSION = ${RELEASE_VERSION}"'
+            
+          }
+        )
       }
     }
     stage('Build') {
@@ -60,7 +72,7 @@ echo RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o S
   }
   environment {
     VERSION = readMavenPom().getVersion()
-    }
+  }
   options {
     buildDiscarder(logRotator(numToKeepStr: '10'))
     timeout(time: 60, unit: 'MINUTES')
