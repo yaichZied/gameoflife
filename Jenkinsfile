@@ -63,6 +63,11 @@ echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o 
         sh 'env'
       }
     }
+    stage('Deployement') {
+      steps {
+        echo 'depoying'
+      }
+    }
   }
   tools {
     maven 'Maven 3.3.9'
