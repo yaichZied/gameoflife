@@ -3,48 +3,28 @@ pipeline {
   stages {
     stage('Initialize') {
       steps {
-        parallel(
-          "Initialize": {
-            echo 'waiting 6 seconds ...'
-            sleep(unit: 'SECONDS', time: 6)
-            git(poll: true, url: 'https://github.com/yaichZied/gameoflife.git', branch: 'pipelineEditorBranch', changelog: true)
-            sh '''
+        echo 'waiting 6 seconds ...'
+        sleep(unit: 'SECONDS', time: 6)
+        git(poll: true, url: 'https://github.com/yaichZied/gameoflife.git', branch: 'pipelineEditorBranch', changelog: true)
+        sh '''
                     echo "PATH = ${PATH}"
                     echo "JENKINS_HOME = ${JENKINS_HOME}"
                     echo "M2_HOME = ${M2_HOME}"
 echo "VERSION = ${VERSION}"
                               '''
-            sh '''mvn 'clean'
+        sh '''mvn 'clean'
 echo "$JENKINS_HOME"
 '''
-            sh 'echo " JENKINS_HOME = ${JENKINS_HOME}"'
-            sh 'env'
-            input 'Should I Continue ?'
-            
-          },
-          "testing": {
-            sh '''touch envVars.properties.groovy
-echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o SNAPSHOT | awk 'BEGIN {FS=":"}{print $1}') - 1))) > envVars.properties.groovy'''
-            load 'envVars.properties.groovy'
-            script {
-              withEnv(['REALEASE_VERSION = load \'envVars.properties.groovy\'']) {
-                echo " $RELEASE_VERSION"
-                env.RELEASE_VERSION= "$RELEASE_VERSION"
-                sh 'env'
-              }
-            }
-            
-            
-          }
-        )
+        sh 'echo " JENKINS_HOME = ${JENKINS_HOME}"'
+        sh 'env'
+        input 'Should I Continue ?'
       }
     }
     stage('Build') {
       steps {
-        sh 'mvn install'
-        sh 'echo "VERSION = $VERSION"'
         sh 'mvn clean package '
-        sh 'env'
+        sh 'echo "VERSION = $VERSION"'
+        sh 'mvn install'
       }
     }
     stage('SonarQube') {
@@ -69,6 +49,18 @@ echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o 
       steps {
         sh '''touch envVars.properties
 echo RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o SNAPSHOT | awk 'BEGIN {FS=":"}{print $1}') - 1))) > envVars.properties'''
+        sh '''touch envVars.properties.groovy
+echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o SNAPSHOT | awk 'BEGIN {FS=":"}{print $1}') - 1))) > envVars.properties.groovy'''
+        load 'envVars.properties.groovy'
+        script {
+          withEnv(['REALEASE_VERSION = load \'envVars.properties.groovy\'']) {
+            echo " $RELEASE_VERSION"
+            env.RELEASE_VERSION= "$RELEASE_VERSION"
+            
+          }
+        }
+        
+        sh 'env'
       }
     }
   }
