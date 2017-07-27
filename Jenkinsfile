@@ -26,9 +26,9 @@ echo "$JENKINS_HOME"
           },
           "tests": {
             sh '''touch envVars.properties.groovy
-echo "echo"
 echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o SNAPSHOT | awk 'BEGIN {FS=":"}{print $1}') - 1))) > envVars.properties.groovy'''
             load 'envVars.properties.groovy'
+            readFile 'envVars.properties.groovy'
             sh 'echo " ${RELEASE_VERSION}"'
             
           }
