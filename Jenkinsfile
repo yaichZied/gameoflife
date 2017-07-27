@@ -28,7 +28,7 @@ echo "$JENKINS_HOME"
             sh '''touch envVars.properties.groovy
 echo RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o SNAPSHOT | awk 'BEGIN {FS=":"}{print $1}') - 1))) > envVars.properties.groovy'''
             load 'envVars.properties.groovy'
-            sh 'echo " $RELEASE_VERSION"'
+            sh 'echo " RELEASE_VERSION = ${RELEASE_VERSION}"'
             
           }
         )
