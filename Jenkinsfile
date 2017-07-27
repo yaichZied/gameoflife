@@ -5,7 +5,7 @@ pipeline {
       steps {
         echo 'waiting 6 seconds ...'
         sleep(unit: 'SECONDS', time: 6)
-        git(poll: true, url: 'https://github.com/yaichZied/gameoflife.git', branch: 'pipelineEditorBranch', changelog: true)
+        git(poll: true, url: 'https://github.com/yaichZied/gameoflife.git', branch: 'BranchPipelineEditor', changelog: true)
         sh '''
                     echo "PATH = ${PATH}"
                     echo "JENKINS_HOME = ${JENKINS_HOME}"
