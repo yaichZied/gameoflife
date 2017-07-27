@@ -30,6 +30,7 @@ echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o 
             script {
               withEnv(['REALEASE_VERSION = load \'envVars.properties.groovy\'']) {
                 echo " $RELEASE_VERSION"
+                env.RELEASE_VERSION= $RELEASE_VERSION
                 sh 'env'
               }
             }
