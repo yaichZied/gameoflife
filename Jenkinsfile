@@ -45,6 +45,7 @@ echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o 
         sh 'mvn install'
         sh 'echo "VERSION = $VERSION"'
         sh 'mvn clean package '
+        sh 'env'
       }
     }
     stage('SonarQube') {
