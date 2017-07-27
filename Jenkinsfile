@@ -25,10 +25,10 @@ echo "$JENKINS_HOME"
             
           },
           "tests": {
-            sh '''touch envVars.properties
-echo RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o SNAPSHOT | awk 'BEGIN {FS=":"}{print $1}') - 1))) > envVars.properties'''
-            readFile 'envVars.properties'
-            sh 'echo " $RELEASE_VERSION "'
+            sh '''touch envVars.properties.groovy
+echo RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o SNAPSHOT | awk 'BEGIN {FS=":"}{print $1}') - 1))) > envVars.properties.groovy'''
+            load 'envVars.properties.groovy'
+            sh 'echo " ${VERSION_RELEASE}"'
             
           }
         )
