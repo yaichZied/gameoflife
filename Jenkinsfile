@@ -16,6 +16,10 @@ echo "VERSION = ${VERSION}"
 echo "$JENKINS_HOME"
 '''
         sh 'echo " JENKINS_HOME = ${JENKINS_HOME}"'
+        timeout(time: 4) {
+          echo 'ops'
+        }
+        
       }
     }
     stage('Build') {
@@ -45,8 +49,6 @@ echo "$JENKINS_HOME"
     }
     stage('Delivery') {
       steps {
-        sh '''touch envVars.properties
-echo RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o SNAPSHOT | awk 'BEGIN {FS=":"}{print $1}') - 1))) > envVars.properties'''
         sh '''touch envVars.properties.groovy
 echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o SNAPSHOT | awk 'BEGIN {FS=":"}{print $1}') - 1))) > envVars.properties.groovy'''
         load 'envVars.properties.groovy'
