@@ -16,8 +16,6 @@ echo "VERSION = ${VERSION}"
 echo "$JENKINS_HOME"
 '''
         sh 'echo " JENKINS_HOME = ${JENKINS_HOME}"'
-        sh 'env'
-        input 'Should I Continue ?'
       }
     }
     stage('Build') {
