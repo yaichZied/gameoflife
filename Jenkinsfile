@@ -42,7 +42,7 @@ echo "$JENKINS_HOME"
     stage('Report') {
       steps {
         junit(testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true, healthScaleFactor: 1)
-        archiveArtifacts(artifacts: '**/target/*.jar', fingerprint: true)
+        archiveArtifacts(artifacts: '**/target/gameoflife-${RELEASE_VERSION}-infra.jar', fingerprint: true, onlyIfSuccessful: true)
         input 'Does this Build seems OK ?'
       }
     }
