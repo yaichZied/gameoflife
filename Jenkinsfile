@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Initialize') {
       steps {
-        timeout(time: 3, unit: 'MINUTES') {
+        timeout(time: 3, unit: 'SECONDS') {
           echo 'waiting 6 seconds ...'
           sleep(unit: 'SECONDS', time: 6)
           git(poll: true, url: 'https://github.com/yaichZied/gameoflife.git', branch: 'BranchPipelineEditor', changelog: true)
@@ -17,7 +17,6 @@ echo "VERSION = ${VERSION}"
 echo "$JENKINS_HOME"
 '''
           sh 'echo " JENKINS_HOME = ${JENKINS_HOME}"'
-          echo 'ops'
         }
         
       }
