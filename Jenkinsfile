@@ -5,7 +5,7 @@ pipeline {
       steps {
         timeout(time: 3, unit: 'MINUTES') {
           echo 'waiting 2 seconds ...'
-          sleep(unit: 'SECONDS', time: 6)
+          sleep(unit: 'SECONDS', time: 2)
           git(poll: true, url: 'https://github.com/yaichZied/gameoflife.git', branch: 'BranchPipelineEditor', changelog: true)
           sh '''
                     echo "PATH = ${PATH}"
@@ -18,7 +18,10 @@ echo "$JENKINS_HOME"
 '''
           sh 'echo " JENKINS_HOME = ${JENKINS_HOME}"'
         }
-        
+      }
+    }
+    stage('Build') {
+      steps {
         script {
           emailext (
             subject: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
@@ -26,18 +29,11 @@ echo "$JENKINS_HOME"
             <p>Check console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p>""",
             recipientProviders: [[$class: 'DevelopersRecipientProvider']]
           )
+          slackSend (message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})" ,color: '#FFFF00')
         }
-        
-      }
-    }
-    stage('Build') {
-      steps {
         sh 'mvn clean package '
         sh 'echo "VERSION = $VERSION"'
         sh 'mvn install'
-        script {
-          slackSend (message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})" ,color: '#FFFF00')
-        }
         
       }
     }
@@ -79,7 +75,7 @@ echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o 
         echo 'depoying'
         script {
           configFileProvider([configFile('c775a584-3f02-4ba0-bfb1-f559bc87178d')]) {
-            echo "ops"
+            echo "settings.xml"
           }
         }
         
@@ -95,6 +91,6 @@ echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o 
   }
   options {
     buildDiscarder(logRotator(numToKeepStr: '10'))
-    timeout(time: 60, unit: 'MINUTES')
+    timeout(time: 6, unit: 'MINUTES')
   }
 }
