@@ -19,6 +19,7 @@ echo "$JENKINS_HOME"
           sh 'echo " JENKINS_HOME = ${JENKINS_HOME}"'
         }
         
+        slackSend(message: 'RUN_DISPLAY_URL : STARTED: Job ${env.JOB_NAME} [${env.BUILD_NUMBER}] (${env.RUN_DISPLAY_URL})', color: '#FFFF00', channel: 'jenkinsbuilds')
       }
     }
     stage('Build') {
