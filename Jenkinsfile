@@ -4,7 +4,7 @@ pipeline {
     stage('Initialize') {
       steps {
         timeout(time: 3, unit: 'MINUTES') {
-          echo 'waiting 2 seconds ...'
+          echo 'waiting 2 seconds ....'
           sleep(unit: 'SECONDS', time: 2)
           git(poll: true, url: 'https://github.com/yaichZied/gameoflife.git', branch: 'BranchPipelineEditor', changelog: true)
           sh '''
