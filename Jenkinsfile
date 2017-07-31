@@ -3,9 +3,8 @@ pipeline {
   stages {
     stage('Initialize') {
       steps {
-        timeout(time: 3, unit: 'MINUTES') { 
-        slackSend(message: " STARTED: Job ${env.JOB_NAME} [${env.BUILD_NUMBER}] (${env.RUN_DISPLAY_URL})", color: '#FFFF00', channel: 'jenkinsbuilds')
-
+        timeout(time: 3, unit: 'MINUTES') {
+          slackSend(message: '" STARTED: Job ${env.JOB_NAME} [${env.BUILD_NUMBER}] (${env.RUN_DISPLAY_URL})"', color: '#FFFF00', channel: 'jenkinsbuilds')
           echo 'waiting 2 seconds ...'
           sleep(unit: 'SECONDS', time: 6)
           git(poll: true, url: 'https://github.com/yaichZied/gameoflife.git', branch: 'BranchPipelineEditor', changelog: true)
@@ -21,7 +20,7 @@ echo "$JENKINS_HOME"
           sh 'echo " JENKINS_HOME = ${JENKINS_HOME}"'
         }
         
-            }
+      }
     }
     stage('Build') {
       steps {
