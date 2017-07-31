@@ -3,11 +3,7 @@ pipeline {
   stages {
     stage('Initialize') {
       steps {
-        timeout(time: 3, unit: 'MINUTES') {
-          script {
-            sendMessage '#00CC00', 'successful :smiley:'
-          }
-          
+        timeout(time: 3, unit: 'MINUTES') { 
           echo 'waiting 2 seconds ...'
           sleep(unit: 'SECONDS', time: 6)
           git(poll: true, url: 'https://github.com/yaichZied/gameoflife.git', branch: 'BranchPipelineEditor', changelog: true)
@@ -85,34 +81,6 @@ echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o 
   }
   environment {
     VERSION = readMavenPom().getVersion()
-  }
-  post {
-    failure {
-      script {
-        if (!env.SKIP_BUILD) {
-          sendMessage '#CC0000', 'failed :scream:'
-        }
-      }
-      
-      
-    }
-    
-    unstable {
-      script {
-        sendMessage '#FFA500', 'unstable :grimacing:'
-      }
-      
-      
-    }
-    
-    success {
-      script {
-        sendMessage '#00CC00', 'successful :smiley:'
-      }
-      
-      
-    }
-    
   }
   options {
     buildDiscarder(logRotator(numToKeepStr: '10'))
