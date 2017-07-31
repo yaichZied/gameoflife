@@ -95,6 +95,6 @@ echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o 
     timeout(time: 6, unit: 'MINUTES')
   }
   triggers {
-    pollSCM('* * * * *')
+    cron('H * * * *')
   }
 }
