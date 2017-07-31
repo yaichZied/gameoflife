@@ -17,10 +17,6 @@ echo "VERSION = ${VERSION}"
 echo "$JENKINS_HOME"
 '''
           sh 'echo " JENKINS_HOME = ${JENKINS_HOME}"'
-          script {
-            
-          }
-          
         }
         
       }
@@ -30,7 +26,10 @@ echo "$JENKINS_HOME"
         sh 'mvn clean package '
         sh 'echo "VERSION = $VERSION"'
         sh 'mvn install'
-        slackSend(message: '"STARTED: Job ${env.JOB_NAME} [${env.BUILD_NUMBER}] (${env.BUILD_URL})"', channel: 'jenkinsbuilds', color: '#FFFF00')
+        script {
+          slackSend (message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})" ,color: '#FFFF00')
+        }
+        
       }
     }
     stage('SonarQube') {
