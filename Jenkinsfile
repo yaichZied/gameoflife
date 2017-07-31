@@ -19,9 +19,8 @@ echo "$JENKINS_HOME"
           sh 'echo " JENKINS_HOME = ${JENKINS_HOME}"'
         }
         
-        script {
           properties([pipelineTriggers([[$class: 'GitHubPushTrigger'], pollSCM('H/15 * * * *')])])
-        }
+        
         
       }
     }
