@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Initialize') {
       steps {
-        properties([pipelineTriggers([[$class: 'GitHubPushTrigger'], pollSCM('H/15 * * * *')])])
+       
         timeout(time: 3, unit: 'MINUTES') {
           echo 'waiting 2 seconds ...'
           sleep(unit: 'SECONDS', time: 2)
@@ -92,6 +92,7 @@ echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o 
   }
   options {
     buildDiscarder(logRotator(numToKeepStr: '10'))
+     properties([pipelineTriggers([[$class: 'GitHubPushTrigger'], pollSCM('* * * * *')])])
     timeout(time: 6, unit: 'MINUTES')
   }
 }
