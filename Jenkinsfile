@@ -6,6 +6,7 @@ pipeline {
         script {
           properties([pipelineTriggers([[$class: 'GitHubPushTrigger'], pollSCM('* * * * *')])])
         }
+        
         timeout(time: 3, unit: 'MINUTES') {
           echo 'waiting 2 seconds ...'
           sleep(unit: 'SECONDS', time: 2)
@@ -21,6 +22,7 @@ echo "$JENKINS_HOME"
 '''
           sh 'echo " JENKINS_HOME = ${JENKINS_HOME}"'
         }
+        
       }
     }
     stage('Build') {
@@ -34,10 +36,10 @@ echo "$JENKINS_HOME"
           )
           slackSend (message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})" ,color: '#FFFF00')
         }
+        
         sh 'mvn clean package '
         sh 'echo "VERSION = $VERSION"'
         sh 'mvn install'
-        
       }
     }
     stage('SonarQube') {
@@ -94,7 +96,6 @@ echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o 
   }
   options {
     buildDiscarder(logRotator(numToKeepStr: '10'))
-     
     timeout(time: 6, unit: 'MINUTES')
   }
 }
