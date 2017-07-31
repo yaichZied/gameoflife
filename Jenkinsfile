@@ -19,8 +19,6 @@ echo "$JENKINS_HOME"
           sh 'echo " JENKINS_HOME = ${JENKINS_HOME}"'
         }
         
-          properties([pipelineTriggers([[$class: 'GitHubPushTrigger'], pollSCM('H/15 * * * *')])])
-        
         
       }
     }
@@ -96,8 +94,5 @@ echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o 
   options {
     buildDiscarder(logRotator(numToKeepStr: '10'))
     timeout(time: 6, unit: 'MINUTES')
-  }
-  triggers {
-    cron('H * * * *')
   }
 }
