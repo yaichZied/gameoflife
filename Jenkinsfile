@@ -90,4 +90,23 @@ echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o 
     buildDiscarder(logRotator(numToKeepStr: '10'))
     timeout(time: 60, unit: 'MINUTES')
   }
+    post {
+        failure {
+            script {
+                if (!env.SKIP_BUILD) {
+                    sendMessage '#CC0000', 'failed :scream:'
+                }
+            }
+        }
+        unstable {
+            script {
+                sendMessage '#FFA500', 'unstable :grimacing:'
+            }
+        }
+        success {
+            script {
+                sendMessage '#00CC00', 'successful :smiley:'
+            }
+        }
+    }
 }
