@@ -26,7 +26,7 @@ echo "$JENKINS_HOME"
         sh 'mvn clean package '
         sh 'echo "VERSION = $VERSION"'
         sh 'mvn install'
-        slackSend(message: 'STARTED: Job \'${env.JOB_NAME} [${env.BUILD_NUMBER}]\' (${env.BUILD_URL})', channel: 'jenkinsbuilds', color: '#FFFF00')
+        slackSend(message: 'STARTED: Job ${env.JOB_NAME} [${env.BUILD_NUMBER}] (${env.BUILD_URL})', channel: 'jenkinsbuilds', color: '#FFFF00')
       }
     }
     stage('SonarQube') {
@@ -60,10 +60,6 @@ echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o 
           }
         }
         
-        sh '''git config --global user.email "zied.yaich5@gmail.com"
-git config --global user.name "yaichZied"
-
-mvn release:clean release:prepare release:perform'''
       }
     }
     stage('Deployement') {
