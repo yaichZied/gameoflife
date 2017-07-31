@@ -60,7 +60,7 @@ echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o 
           }
         }
         
-        sh 'env'
+        sh 'mvn release:clean release:prepare release:perform'
       }
     }
     stage('Deployement') {
