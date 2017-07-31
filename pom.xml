@@ -6,7 +6,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>gameoflife</name>
-    <url>https://github.com/wakaleo/game-of-life</url>
+    <url>https://github.com/yaichZied/gameoflife</url>
     <properties>
         <build.number>SNAPSHOT</build.number>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -15,16 +15,16 @@
         <!-- A workaround for a bug in PMD -->
         <sourceJdk>1.7</sourceJdk>
         <targetJdk>1.7</targetJdk>
-        <github.account>wakaleo</github.account>
+        <github.account>yaichZied</github.account>
         <thucydides.version>0.9.268</thucydides.version>
         <jelastic.context>gameoflife</jelastic.context>
         <jelastic.environment>wakaleo</jelastic.environment>
     </properties>
 
     <scm>
-        <connection>scm:git:git@github.com:${github.account}/game-of-life.git</connection>
-        <developerConnection>scm:git:git@github.com:${github.account}/game-of-life.git</developerConnection>
-        <url>scm:git:git@github.com:${github.account}/game-of-life.git</url>
+        <connection>scm:git:git@github.com:${github.account}/gameoflife.git</connection>
+        <developerConnection>scm:git:git@github.com:${github.account}/gameoflife.git</developerConnection>
+        <url>scm:git:git@github.com:${github.account}/gameoflife.git</url>
     </scm>
     <build>
         <plugins>
