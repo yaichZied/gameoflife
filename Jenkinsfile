@@ -19,9 +19,7 @@ echo "$JENKINS_HOME"
 '''
           sh 'echo " JENKINS_HOME = ${JENKINS_HOME}"'
           script {
-            def summary = "${subject} (${env.BUILD_URL})"
-            def colorCode = '#FFFF00'
-            slackSend (color: colorCode, message: summary)
+            slackSend ( message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})" , color: '#FF0000')
           }
           
         }
