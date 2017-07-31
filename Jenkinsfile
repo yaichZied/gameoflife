@@ -3,10 +3,6 @@ pipeline {
   stages {
     stage('Initialize') {
       steps {
-        script {
-          properties([pipelineTriggers([[$class: 'GitHubPushTrigger'], pollSCM('* * * * *')])])
-        }
-        
         timeout(time: 3, unit: 'MINUTES') {
           echo 'waiting 2 seconds ...'
           sleep(unit: 'SECONDS', time: 2)
