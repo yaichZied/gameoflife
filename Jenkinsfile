@@ -60,7 +60,10 @@ echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o 
           }
         }
         
-        sh 'mvn release:clean release:prepare release:perform'
+        sh '''git config --global user.email "zied.yaich5@gmail.com"
+git config --global user.name "yaichZied"
+
+mvn release:clean release:prepare release:perform'''
       }
     }
     stage('Deployement') {
