@@ -6,7 +6,7 @@ pipeline {
         timeout(time: 3, unit: 'MINUTES') {
           echo 'waiting 2 seconds ....'
           sleep(unit: 'SECONDS', time: 2)
-          git(poll: true, url: 'https://github.com/yaichZied/gameoflife.git', branch: 'BranchPipelineEditor', changelog: true)
+          git(poll: true, url: 'https://github.com/yaichZied/gameoflife.git', branch: '${env.BRANCH_NAME}', changelog: true)
           sh '''
                     echo "PATH = ${PATH}"
                     echo "JENKINS_HOME = ${JENKINS_HOME}"
@@ -18,7 +18,6 @@ echo "$JENKINS_HOME"
 '''
           sh 'echo " JENKINS_HOME = ${JENKINS_HOME}"'
         }
-        
         
       }
     }
