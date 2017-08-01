@@ -17,12 +17,6 @@ echo "VERSION = ${VERSION}"
 echo "$JENKINS_HOME"
 '''
           sh 'echo " JENKINS_HOME = ${JENKINS_HOME}"'
-          script {
-            def response = httpRequest 'http://localhost:8080/api/json?pretty=true'
-            println("Status: "+response.status)
-            println("Content: "+response.content)
-          }
-          
         }
         
       }
@@ -73,6 +67,12 @@ echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o 
             env.RELEASE_VERSION= "$RELEASE_VERSION"
             
           }
+        }
+        
+        script {
+          def response = httpRequest 'http://localhost:8080/api/json?pretty=true'
+          println("Status: "+response.status)
+          println("Content: "+response.content)
         }
         
       }
