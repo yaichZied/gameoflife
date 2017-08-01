@@ -75,6 +75,10 @@ echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o 
           println("Content: "+response.content)
         }
         
+        script {
+          nexusArtifactUploader artifacts: [[artifactId: 'gameoflife-build-1.0-SNAPSHOT', classifier: 'snap', file: 'gameoflife-core/target/gameoflife-build-1.0-SNAPSHOT.jar', type: 'jar']], credentialsId: 'nexusAdmin', groupId: 'org.test', nexusUrl: '192.168.1.165:8081/', nexusVersion: 'nexus3', protocol: 'https', repository: 'artifactTests', version: '1.0'
+        }
+        
       }
     }
     stage('Deployement') {
