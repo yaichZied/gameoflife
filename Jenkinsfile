@@ -41,9 +41,9 @@ echo "$JENKINS_HOME"
         
         sh '''configFileProvider([configFile('c775a584-3f02-4ba0-bfb1-f559bc87178d')]) {
               echo "settings.xml"
-        sh 'mvn install'
-        sh 'mvn clean'
-        sh 'mvn deploy'
+        sh "mvn install"
+        sh "mvn clean"
+        sh "mvn deploy"
 }'''
           sh 'echo "VERSION = $VERSION"'
           sh 'mvn install'
