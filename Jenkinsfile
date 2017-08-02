@@ -39,68 +39,73 @@ echo "$JENKINS_HOME"
           slackSend (message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})" ,color: '#FFFF00')
         }
         
-        sh 'mvn clean package '
-        sh 'echo "VERSION = $VERSION"'
+        sh '''configFileProvider([configFile('c775a584-3f02-4ba0-bfb1-f559bc87178d')]) {
+              echo "settings.xml"
         sh 'mvn install'
         sh 'mvn clean'
         sh 'mvn deploy'
-      }
-    }
-    stage('SonarQube') {
-      steps {
-        script {
-          scannerHome = tool 'sonar'
-          withSonarQubeEnv('sonarServer') {
-            sh "${scannerHome}/bin/sonar-scanner"
-          }
+}'''
+          sh 'echo "VERSION = $VERSION"'
+          sh 'mvn install'
+          sh 'mvn clean'
+          sh 'mvn deploy'
         }
-        
       }
-    }
-    stage('Report') {
-      steps {
-        junit(testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true, healthScaleFactor: 1)
-        archiveArtifacts(artifacts: '**/target/*.jar', fingerprint: true)
-        input 'Does this Build seems OK ?'
+      stage('SonarQube') {
+        steps {
+          script {
+            scannerHome = tool 'sonar'
+            withSonarQubeEnv('sonarServer') {
+              sh "${scannerHome}/bin/sonar-scanner"
+            }
+          }
+          
+        }
       }
-    }
-    stage('Delivery') {
-      steps {
-        sh '''touch envVars.properties.groovy
+      stage('Report') {
+        steps {
+          junit(testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true, healthScaleFactor: 1)
+          archiveArtifacts(artifacts: '**/target/*.jar', fingerprint: true)
+          input 'Does this Build seems OK ?'
+        }
+      }
+      stage('Delivery') {
+        steps {
+          sh '''touch envVars.properties.groovy
 echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o SNAPSHOT | awk 'BEGIN {FS=":"}{print $1}') - 1))) > envVars.properties.groovy'''
-        load 'envVars.properties.groovy'
-        script {
-          withEnv(['REALEASE_VERSION = load \'envVars.properties.groovy\'']) {
-            echo " $RELEASE_VERSION"
-            env.RELEASE_VERSION= "$RELEASE_VERSION"
-            
+          load 'envVars.properties.groovy'
+          script {
+            withEnv(['REALEASE_VERSION = load \'envVars.properties.groovy\'']) {
+              echo " $RELEASE_VERSION"
+              env.RELEASE_VERSION= "$RELEASE_VERSION"
+              
+            }
           }
+          
+          script {
+            def response = httpRequest 'http://localhost:8080/api/json?pretty=true'
+            println("Status: "+response.status)
+            println("Content: "+response.content)
+          }
+          
+          sh 'mvn \'release:clean release:prepare release:perform -Dusername=jenkins -Dpassword=jenkinsSifast6283\''
         }
-        
-        script {
-          def response = httpRequest 'http://localhost:8080/api/json?pretty=true'
-          println("Status: "+response.status)
-          println("Content: "+response.content)
+      }
+      stage('Deployement') {
+        steps {
+          echo 'depoying'
         }
-        
-        sh 'mvn \'release:clean release:prepare release:perform -Dusername=jenkins -Dpassword=jenkinsSifast6283\''
       }
     }
-    stage('Deployement') {
-      steps {
-        echo 'depoying'
-      }
+    tools {
+      maven 'Maven 3.3.9'
+      jdk 'jdk8'
+    }
+    environment {
+      VERSION = readMavenPom().getVersion()
+    }
+    options {
+      buildDiscarder(logRotator(numToKeepStr: '10'))
+      timeout(time: 6, unit: 'MINUTES')
     }
   }
-  tools {
-    maven 'Maven 3.3.9'
-    jdk 'jdk8'
-  }
-  environment {
-    VERSION = readMavenPom().getVersion()
-  }
-  options {
-    buildDiscarder(logRotator(numToKeepStr: '10'))
-    timeout(time: 6, unit: 'MINUTES')
-  }
-}
