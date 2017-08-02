@@ -36,7 +36,8 @@ echo "$JENKINS_HOME"
         sh 'mvn clean package '
         sh 'echo "VERSION = $VERSION"'
         sh 'mvn install'
-        sh 'mvn \'clean deploy\''
+        sh 'mvn clean'
+        sh 'mvn deploy'
       }
     }
     stage('SonarQube') {
