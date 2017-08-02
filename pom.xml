@@ -180,16 +180,16 @@
 		<repository>
 			<id>releases</id>
 			<name>SiFast Release Repository</name>
-			<url>http://localhost:8081/repository/maven-releases/</url>
+			<url>http://127.0.0.1:8081/repository/maven-releases/</url>
 		</repository>
 		<snapshotRepository>
 			<id>snapshots</id>
 			<name>SiFast Snapshot Repository</name>
-			<url>http://localhost:8081/repository/maven-snapshots/</url>
+			<url>http://127.0.0.1:8081/repository/maven-snapshots/</url>
 		</snapshotRepository>
 		<site>
 			<id>maven-site</id>
-			<url>dav:http://localhost:8081/repository/maven-site/${project.artifactId}-${project.version}</url>
+			<url>dav:http://127.0.0.1:8081/repository/maven-site/${project.artifactId}-${project.version}</url>
 		</site>
 	</distributionManagement>
     
