@@ -17,6 +17,12 @@ echo "VERSION = ${VERSION}"
 echo "$JENKINS_HOME"
 '''
           sh 'echo " JENKINS_HOME = ${JENKINS_HOME}"'
+          script {
+            configFileProvider([configFile('c775a584-3f02-4ba0-bfb1-f559bc87178d')]) {
+              echo "settings.xml"
+            }
+          }
+          
         }
         
       }
@@ -83,12 +89,6 @@ echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o 
     stage('Deployement') {
       steps {
         echo 'depoying'
-        script {
-          configFileProvider([configFile('c775a584-3f02-4ba0-bfb1-f559bc87178d')]) {
-            echo "settings.xml"
-          }
-        }
-        
       }
     }
   }
