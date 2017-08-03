@@ -204,6 +204,12 @@
         </dependencies>
     </dependencyManagement>
     <dependencies>
+	    <dependency>
+		    <groupId>net.thucydides</groupId>
+		    <artifactId>thucydides</artifactId>
+		    <version>0.9.268</version>
+		    <type>pom</type>
+		</dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
