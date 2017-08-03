@@ -107,6 +107,6 @@ echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o 
   }
   options {
     buildDiscarder(logRotator(numToKeepStr: '10'))
-    timeout(time: 6, unit: 'MINUTES')
+    timeout(time: 60, unit: 'MINUTES')
   }
 }
