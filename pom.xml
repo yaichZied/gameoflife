@@ -204,7 +204,33 @@
         </dependencies>
     </dependencyManagement>
     <dependencies>
-	   
+	 <dependency>
+            <groupId>net.thucydides</groupId>
+            <artifactId>thucydides-core</artifactId>
+            <version>${thucydides.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>log4j</artifactId>
+                    <groupId>log4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>net.thucydides</groupId>
+            <artifactId>thucydides-junit</artifactId>
+            <version>${thucydides.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>log4j</artifactId>
+                    <groupId>log4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>net.thucydides</groupId>
+            <artifactId>thucydides-cucumber-plugin</artifactId>
+            <version>0.9.x-SNAPSHOT</version>
+        </dependency>  
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -231,6 +257,145 @@
         <module>gameoflife-web</module>
     </modules>
     <profiles>
+	     <profile>
+            <id>stable-version</id>
+            <properties>
+                <thucydides.version>0.9.269</thucydides.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>snapshot</id>
+            <properties>
+                <thucydides.version>0.9.x-SNAPSHOT</thucydides.version>
+            </properties>
+        </profile>
+	    <profile>
+            <id>jira</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <thucydides.version>0.9.269</thucydides.version>
+                <thucydides.jbehave.version>0.9.268</thucydides.jbehave.version>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>net.thucydides.plugins.jira</groupId>
+                    <artifactId>thucydides-jira-plugin</artifactId>
+                    <version>0.9.268</version>
+                </dependency>
+                <dependency>
+                    <groupId>net.thucydides.plugins.jira</groupId>
+                    <artifactId>thucydides-jira-requirements-provider</artifactId>
+                    <version>0.9.268</version>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>net.thucydides.maven.plugins</groupId>
+                        <artifactId>maven-thucydides-plugin</artifactId>
+                        <version>${thucydides.version}</version>
+                        <executions>
+                            <execution>
+                                <id>thucydides-reports</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>aggregate</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>net.thucydides.plugins.jira</groupId>
+                                <artifactId>thucydides-jira-plugin</artifactId>
+                                <version>0.9.268</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>net.thucydides.plugins.jira</groupId>
+                                <artifactId>thucydides-jira-requirements-provider</artifactId>
+                                <version>0.9.268</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>jira-customfields</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>net.thucydides.plugins.jira</groupId>
+                    <artifactId>thucydides-jira-plugin</artifactId>
+                    <version>0.9.268</version>
+                </dependency>
+                <dependency>
+                    <groupId>net.thucydides.plugins.jira</groupId>
+                    <artifactId>thucydides-jira-customfields-requirements-provider</artifactId>
+                    <version>0.9.268</version>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>net.thucydides.maven.plugins</groupId>
+                        <artifactId>maven-thucydides-plugin</artifactId>
+                        <version>${thucydides.version}</version>
+                        <executions>
+                            <execution>
+                                <id>thucydides-reports</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>aggregate</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>net.thucydides.plugins.jira</groupId>
+                                <artifactId>thucydides-jira-plugin</artifactId>
+                                <version>0.9.268</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>net.thucydides.plugins.jira</groupId>
+                                <artifactId>thucydides-jira-customfields-requirements-provider</artifactId>
+                                <version>0.9.268</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>filesystem</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <thucydides.version>0.9.269</thucydides.version>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>net.thucydides.maven.plugins</groupId>
+                        <artifactId>maven-thucydides-plugin</artifactId>
+                        <version>${thucydides.version}</version>
+                        <executions>
+                            <execution>
+                                <id>thucydides-reports</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>aggregate</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
         <profile>
             <id>development</id>
             <activation>
@@ -242,6 +407,25 @@
             <id>metrics</id>
             <build>
                 <plugins>
+			<plugin>
+                <groupId>net.thucydides.maven.plugins</groupId>
+                <artifactId>maven-thucydides-plugin</artifactId>
+                <version>${thucydides.version}</version>
+                <executions>
+                    <execution>
+                        <id>thucydides-reports</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>aggregate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>net.thucydides.maven.plugins</groupId>
+                <artifactId>thucydides-dashboard-maven-plugin</artifactId>
+                <version>0.9.252</version>
+            </plugin>
                     <!-- CHECKSTYLE -->
                     <!--<plugin>-->
                         <!--<artifactId>maven-checkstyle-plugin</artifactId>-->
