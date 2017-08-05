@@ -17,8 +17,6 @@ echo "VERSION = ${VERSION}"
 echo "$JENKINS_HOME"
 '''
           sh 'echo " JENKINS_HOME = ${JENKINS_HOME}"'
-         
-          
         }
         
       }
@@ -41,6 +39,7 @@ echo "$JENKINS_HOME"
             sh "mvn  -s $MAVEN_SETTINGS deploy"
           }
         }
+        
       }
     }
     stage('SonarQube') {
