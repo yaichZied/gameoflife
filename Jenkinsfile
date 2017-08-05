@@ -17,11 +17,7 @@ echo "VERSION = ${VERSION}"
 echo "$JENKINS_HOME"
 '''
           sh 'echo " JENKINS_HOME = ${JENKINS_HOME}"'
-          script {
-            configFileProvider([configFile('c775a584-3f02-4ba0-bfb1-f559bc87178d')]) {
-              echo "settings.xml"
-            }
-          }
+         
           
         }
         
@@ -45,11 +41,6 @@ echo "$JENKINS_HOME"
             sh "mvn  -s $MAVEN_SETTINGS deploy"
           }
         }
-        
-        sh 'echo "VERSION = $VERSION"'
-        sh 'mvn install'
-        sh 'mvn clean'
-        sh 'mvn deploy'
       }
     }
     stage('SonarQube') {
@@ -89,7 +80,7 @@ echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o 
           println("Content: "+response.content)
         }
         
-        sh 'mvn \'release:clean release:prepare release:perform -Dusername=jenkins -Dpassword=jenkinsSifast6283\''
+        sh 'mvn \'release:clean release:prepare release:perform -Dusername=admin -Dpassword=admin123\''
       }
     }
     stage('Deployement') {
