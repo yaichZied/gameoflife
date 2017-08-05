@@ -38,10 +38,10 @@ echo "$JENKINS_HOME"
             sh "mvn   clean"
             sh "mvn  -s $MAVEN_SETTINGS deploy"
             sh """
-        git config --global user.email zied.yaich5@gmail.com 
-        git config --global user.name yaichZied
-        """
-        sh "mvn -s $MAVEN_SETTINGS --batch-mode release:clean release:prepare release:perform"
+            git config --global user.email zied.yaich5@gmail.com
+            git config --global user.name yaichZied
+            """
+            sh "mvn -s $MAVEN_SETTINGS --batch-mode release:clean release:prepare release:perform"
           }
         }
         
