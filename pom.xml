@@ -22,13 +22,13 @@
 </properties>
 <scm>
 <connection>
-scm:git:git@github.com:${github.account}/gameoflife.git
+scm:git:http://github.com/yaichZied/gameoflife.git
 </connection>
 <developerConnection>
-scm:git:git@github.com:${github.account}/gameoflife.git
+scm:git:http://github.com/yaichZied/gameoflife.git
 </developerConnection>
 <url>
-scm:git:git@github.com:${github.account}/gameoflife.git
+scm:git:http://github.com/yaichZied/gameoflife.git
 </url>
 </scm>
 	
