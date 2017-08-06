@@ -123,13 +123,11 @@ scm:git:http://github.com/yaichZied/gameoflife.git
 </executions>
 </plugin>
 <plugin>
-<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>
-				<version>2.5.3</version>
-				<!-- This configuration is used by Jenkins to pass arguments to Maven plugin -->
-				<configuration>
-					<arguments>${arguments}</arguments>
-				</configuration>
+	 <artifactId>maven-release-plugin</artifactId>
+	 <version>2.5</version>
+	 <configuration>
+	 	<preparationGoals>clean install</preparationGoals>
+	 </configuration>
 </plugin>
 <plugin>
 <artifactId>maven-deploy-plugin</artifactId>
@@ -197,6 +195,11 @@ l
 </build>
 <dependencyManagement>
 <dependencies>
+	<dependency>
+    <groupId>org.sonatype.sisu</groupId>
+    <artifactId>sisu-inject-bean</artifactId>
+    <version>1.4.2</version>
+</dependency>
 	<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
