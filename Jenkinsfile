@@ -84,7 +84,6 @@ echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o 
           println("Content: "+response.content)
         }
         
-        sh 'mvn \'release:clean release:prepare release:perform -Dusername=admin -Dpassword=admin123\''
       }
     }
     stage('Deployement') {
