@@ -123,11 +123,13 @@ scm:git:http://github.com/yaichZied/gameoflife.git
 </executions>
 </plugin>
 <plugin>
-<artifactId>maven-release-plugin</artifactId>
-<version>2.5</version>
-<configuration>
-<preparationGoals>clean install</preparationGoals>
-</configuration>
+<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5.3</version>
+				<!-- This configuration is used by Jenkins to pass arguments to Maven plugin -->
+				<configuration>
+					<arguments>${arguments}</arguments>
+				</configuration>
 </plugin>
 <plugin>
 <artifactId>maven-deploy-plugin</artifactId>
