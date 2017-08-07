@@ -2,7 +2,7 @@
 <modelVersion>4.0.0</modelVersion>
 <groupId>com.wakaleo.gameoflife</groupId>
 <artifactId>gameoflife</artifactId>
-<version>1.8-SNAPSHOT</version>
+<version>1.8</version>
 <packaging>pom</packaging>
 <name>gameoflife</name>
 <url>https://github.com/yaichZied/gameoflife</url>
@@ -30,7 +30,7 @@ scm:git:http://github.com/yaichZied/gameoflife.git
 <url>
 scm:git:http://github.com/yaichZied/gameoflife.git
 </url>
-  <tag>HEAD</tag>
+  <tag>gameoflife-1.8</tag>
   </scm>
 	
 		
