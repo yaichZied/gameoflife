@@ -199,6 +199,11 @@ l
 <dependencyManagement>
 <dependencies>
 	<dependency>
+    <groupId>maven</groupId>
+    <artifactId>maven-checkstyle-plugin</artifactId>
+    <version>3.0.1</version>
+</dependency>
+	<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 			<version>2.30.0</version>
