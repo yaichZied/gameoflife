@@ -468,6 +468,16 @@ l
 </execution>
 </executions>
 </plugin>
+	
+	<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.0.0-M1</version>
+                <configuration>
+                </configuration>
+            </plugin>
+	
+	
 <plugin>
 <groupId>org.apache.maven.plugins</groupId>
 <artifactId>maven-site-plugin</artifactId>
@@ -528,7 +538,7 @@ l
 <xmlOutput>true</xmlOutput>
 </configuration>
 </plugin>
-<!--<plugin>
+<plugin>
 	<artifactId>maven-javadoc-plugin</artifactId>
 	<version>2.7</version>
 	<configuration>
@@ -544,7 +554,7 @@ l
 		</additionalparam>
 	</configuration>
 </plugin>
--->
+
 <plugin>
 <groupId>org.apache.maven.plugins</groupId>
 <artifactId>maven-jxr-plugin</artifactId>
