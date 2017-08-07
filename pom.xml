@@ -128,6 +128,7 @@ scm:git:http://github.com/yaichZied/gameoflife.git
 				<version>2.5.3</version>
 				<!-- This configuration is used by Jenkins to pass arguments to Maven plugin -->
 				<configuration>
+					<preparationGoals>clean install</preparationGoals>
 					<arguments>${arguments}</arguments>
 				</configuration>
 </plugin>
@@ -368,7 +369,7 @@ l
 <xmlOutput>true</xmlOutput>
 </configuration>
 </plugin>
-<!--<plugin>
+<plugin>
 	<artifactId>maven-javadoc-plugin</artifactId>
 	<version>2.9.1</version>
 	<configuration>
@@ -384,7 +385,7 @@ l
 			
 		</additionalparam>
 	</configuration>
-</plugin>-->
+</plugin>
 <plugin>
 <groupId>org.apache.maven.plugins</groupId>
 <artifactId>maven-jxr-plugin</artifactId>
@@ -487,7 +488,7 @@ l
 <xmlOutput>true</xmlOutput>
 </configuration>
 </plugin>
-<!--<plugin>
+<plugin>
 <artifactId>maven-javadoc-plugin</artifactId>
 	<version>2.7</version>
 	<configuration>
@@ -502,7 +503,7 @@ l
 	-Xdoclint:none -inferrel -inferdep -hide java.* -collpackages java.util.* -attributes -operations -enumerations -enumconstants
  </additionalparam>
 	</configuration>
-</plugin>-->
+</plugin>
 <plugin>
 <groupId>org.apache.maven.plugins</groupId>
 <artifactId>maven-jxr-plugin</artifactId>
