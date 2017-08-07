@@ -53,19 +53,6 @@ scm:git:http://github.com/yaichZied/gameoflife.git
 	</distributionManagement>
 <build>
 <plugins>
-	
-	<plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-resources-plugin</artifactId>
-            <version>2.7</version>
-          <dependencies>
-            <dependency>
-                <groupId>org.apache.maven.shared</groupId>
-                <artifactId>maven-filtering</artifactId>
-                <version>1.3</version>
-            </dependency>
-          </dependencies>
-        </plugin>
 <plugin>
 <artifactId>maven-compiler-plugin</artifactId>
 <version>3.1</version>
@@ -135,13 +122,14 @@ scm:git:http://github.com/yaichZied/gameoflife.git
 </execution>
 </executions>
 </plugin>
-	
 <plugin>
-	 <artifactId>maven-release-plugin</artifactId>
-	 <version>2.5</version>
-	 <configuration>
-	 	<preparationGoals>clean install</preparationGoals>
-	 </configuration>
+<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5.3</version>
+				<!-- This configuration is used by Jenkins to pass arguments to Maven plugin -->
+				<configuration>
+					<arguments>${arguments}</arguments>
+				</configuration>
 </plugin>
 <plugin>
 <artifactId>maven-deploy-plugin</artifactId>
@@ -210,12 +198,6 @@ l
 <dependencyManagement>
 <dependencies>
 	<dependency>
-    <groupId>org.sonatype.sisu</groupId>
-    <artifactId>sisu-inject-bean</artifactId>
-    <version>1.4.2</version>
-</dependency>
-	
-	<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 			<version>2.30.0</version>
@@ -254,27 +236,6 @@ l
 <module>gameoflife-web</module>
 </modules>
 <profiles>
-	<profile>
-      <id>release</id>
-      <build>
-        <plugins>
-	 
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-source-plugin</artifactId>
-            <version>3.0.1</version>
-            <executions>
-              <execution>
-                <id>attach-sources</id>
-                <goals>
-                  <goal>jar-no-fork</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
 <profile>
 <id>development</id>
 <activation>
@@ -418,8 +379,8 @@ l
 <artifactId>UmlGraph</artifactId>
 <version>4.6</version>
 </docletArtifact>
-<additionalparam>	
--Xdoclint:none -inferrel -inferdep -hide java.* -collpackages java.util.* -attributes -operations -enumerations -enumconstants 
+<additionalparam>
+-inferrel -inferdep -hide java.* -collpackages java.util.* -attributes -operations -enumerations -enumconstants
 </additionalparam>
 </configuration>
 </plugin>
@@ -465,9 +426,6 @@ l
 </execution>
 </executions>
 </plugin>
-	
-	
-	
 <plugin>
 <groupId>org.apache.maven.plugins</groupId>
 <artifactId>maven-site-plugin</artifactId>
@@ -529,22 +487,21 @@ l
 </configuration>
 </plugin>
 <plugin>
-	<artifactId>maven-javadoc-plugin</artifactId>
-	<version>2.7</version>
-	<configuration>
-		<source>1.6</source>
-		<doclet>gr.spinellis.umlgraph.doclet.UmlGraphDoc</doclet>
-		<docletArtifact>
-			<groupId>gr.spinellis</groupId>
-			<artifactId>UmlGraph</artifactId>
-			<version>4.6</version>
-		</docletArtifact>	
-		<additionalparam>
-			-Xdoclint:none -inferrel -inferdep -hide java.* -collpackages java.util.* -attributes -operations -enumerations -enumconstants
-		</additionalparam>
-	</configuration>
+<artifactId>maven-javadoc-plugin</artifactId>
+<version>2.7</version>
+<configuration>
+<source>1.6</source>
+<doclet>gr.spinellis.umlgraph.doclet.UmlGraphDoc</doclet>
+<docletArtifact>
+<groupId>gr.spinellis</groupId>
+<artifactId>UmlGraph</artifactId>
+<version>4.6</version>
+</docletArtifact>
+<additionalparam>
+-inferrel -inferdep -hide java.* -collpackages java.util.* -attributes -operations -enumerations -enumconstants
+</additionalparam>
+</configuration>
 </plugin>
-
 <plugin>
 <groupId>org.apache.maven.plugins</groupId>
 <artifactId>maven-jxr-plugin</artifactId>
