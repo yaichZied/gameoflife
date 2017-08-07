@@ -395,8 +395,8 @@ l
 			</reportPlugins>
 		</configuration>
 		<dependencies>
-			<dependency>
-			    <groupId>maven</groupId>
+			<dependency>				
+			<groupId>org.apache.maven.plugins</groupId>
 			    <artifactId>maven-checkstyle-plugin</artifactId>
 			    <version>3.0.1</version>
 			</dependency>
