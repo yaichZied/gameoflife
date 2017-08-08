@@ -32,21 +32,31 @@ scm:git:http://github.com/yaichZied/gameoflife.git
 </url>
   <tag>HEAD</tag>
   </scm>
-	
+	<distributionManagement>
+		<repository>
+			<id>releases</id>
+			<name>SiFast Release Repository</name>
+			<url>http://192.168.1.165:8081/repository/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>SiFast Snapshot Repository</name>
+			<url>http://192.168.1.165:8081/repository/snapshots/</url>
+		</snapshotRepository>
+		<site>
+			<id>maven-site</id>
+			<url>dav:http://192.168.1.165:8081/repository/maven-site/${project.artifactId}-${project.version}</url>
+		</site>
+	</distributionManagement>
 		
 	
-  <distributionManagement>
+ <!-- <distributionManagement>
 
 		<repository>
 			<id>maven-releases</id>
 			<name>SiFast Release Repository</name>
 			<url>http://127.0.0.1:8081/repository/maven-releases/</url>
 		</repository>
-	  	<!--<repository>
-			<id>maven-public</id>
-			<name>SiFast Public Repository</name>
-			<url>http://127.0.0.1:8081/repository/maven-public/</url>
-		</repository>-->
 		<snapshotRepository>
 			<id>maven-snapshots</id>
 			<name>SiFast Snapshot Repository</name>
@@ -56,7 +66,7 @@ scm:git:http://github.com/yaichZied/gameoflife.git
 			<id>maven-site</id>
 			<url>dav:http://127.0.0.1:8081/repository/maven-site/${project.artifactId}-${project.version}</url>
 		</site>
-	</distributionManagement>
+	</distributionManagement>-->
 <build>
 <plugins>
 <plugin>
