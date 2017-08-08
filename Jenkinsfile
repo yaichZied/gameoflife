@@ -42,6 +42,7 @@ echo "$JENKINS_HOME"
             git config --global user.email zied.yaich5@gmail.com
             git config --global user.name yaichZied
             """
+            sh "git clean -df && git reset --hard"
             sh "mvn -s $MAVEN_SETTINGS --batch-mode release:clean release:prepare release:perform"
           }
         }
