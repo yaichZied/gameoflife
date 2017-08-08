@@ -19,6 +19,18 @@ echo "$JENKINS_HOME"
           sh 'echo " JENKINS_HOME = ${JENKINS_HOME}"'
         }
         
+        sh '''mvn deploy:deploy-file -Durl=file: maven-checkstyle-plugin-3.0.1.jar \
+                       -DrepositoryId=maven-public \
+                       -Dfile=maven-checkstyle-plugin-3.0.1.jar \
+                       -DpomFile=pom.xml \
+                       -DgroupId=org.apache.maven.plugins \
+                       -DartifactId=maven-checkstyle-plugin \
+                       -Dversion=3.0.1 \
+                       -Dpackaging=jar \
+                       -Dclassifier=sources \
+                       -DgeneratePom=true \
+                      -DuniqueVersion=false
+'''
       }
     }
     stage('Build') {
