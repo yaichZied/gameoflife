@@ -88,7 +88,7 @@ echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o 
     }
     stage('Deployement') {
       steps {
-        echo 'depoying'
+        echo 'depoying app'
       }
     }
   }
