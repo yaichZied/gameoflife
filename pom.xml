@@ -36,16 +36,17 @@ scm:git:http://github.com/yaichZied/gameoflife.git
 		
 	
   <distributionManagement>
+	  <repositories>
 		<repository>
 			<id>maven-releases</id>
 			<name>SiFast Release Repository</name>
 			<url>http://127.0.0.1:8081/repository/maven-releases/</url>
 		</repository>
-	  	<publicRepository>
+	  	<repository>
 			<id>maven-public</id>
 			<name>SiFast Public Repository</name>
 			<url>http://127.0.0.1:8081/repository/maven-public/</url>
-		</publicRepository>
+		</repository>
 		<snapshotRepository>
 			<id>maven-snapshots</id>
 			<name>SiFast Snapshot Repository</name>
@@ -55,6 +56,7 @@ scm:git:http://github.com/yaichZied/gameoflife.git
 			<id>maven-site</id>
 			<url>dav:http://127.0.0.1:8081/repository/maven-site/${project.artifactId}-${project.version}</url>
 		</site>
+		  </repositories>
 	</distributionManagement>
 <build>
 <plugins>
