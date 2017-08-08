@@ -31,7 +31,7 @@ echo "$JENKINS_HOME"
             recipientProviders: [[$class: 'DevelopersRecipientProvider']]
           )
           slackSend (message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})" ,color: '#FFFF00')
-          configFileProvider([configFile( fileId: 'c775a584-3f02-4ba0-bfb1-f559bc87178d', variable: 'MAVEN_SETTINGS')]) {
+          configFileProvider([configFile( fileId: 'fb0c2c4a-dc96-428e-b0c1-55937ef69479', variable: 'MAVEN_SETTINGS')]) {
             
             echo "MAVEN_SETTINGS = $MAVEN_SETTINGS"
             sh "mvn help:effective-settings"
