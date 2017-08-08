@@ -34,7 +34,7 @@ echo "$JENKINS_HOME"
           configFileProvider([configFile( fileId: 'c775a584-3f02-4ba0-bfb1-f559bc87178d', variable: 'MAVEN_SETTINGS')]) {
             sh '''mvn deploy:deploy-file -s $MAVEN_SETTINGS -Durl=file: maven-checkstyle-plugin-3.0.1.jar \
 -DrepositoryId= maven-public \
--Dfile=~/Downloads/maven-checkstyle-plugin-3.0.1.jar \
+-Dfile=maven-checkstyle-plugin-3.0.1.jar \
 -DpomFile=pom.xml \
 -DgroupId=org.apache.maven.plugins \
 -DartifactId=maven-checkstyle-plugin \
