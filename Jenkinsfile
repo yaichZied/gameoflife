@@ -33,7 +33,7 @@ echo "$JENKINS_HOME"
           slackSend (message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})" ,color: '#FFFF00')
           configFileProvider([configFile( fileId: 'c775a584-3f02-4ba0-bfb1-f559bc87178d', variable: 'MAVEN_SETTINGS')]) {
             sh '''mvn deploy:deploy-file -s $MAVEN_SETTINGS -Durl=file: maven-checkstyle-plugin-3.0.1.jar \
--DrepositoryId=maven-public \
+-DrepositoryId= maven-public \
 -Dfile=maven-checkstyle-plugin-3.0.1.jar \
 -DpomFile=pom.xml \
 -DgroupId=org.apache.maven.plugins \
@@ -41,7 +41,7 @@ echo "$JENKINS_HOME"
 -Dversion=3.0.1 \
 -Dpackaging=jar \
 -Dclassifier=sources \
--DgeneratePom=true \
+-DgeneratePom=false \
 -DuniqueVersion=false
 '''
             echo "MAVEN_SETTINGS = $MAVEN_SETTINGS"
