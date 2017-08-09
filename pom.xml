@@ -3,7 +3,7 @@
 <groupId>com.wakaleo.gameoflife</groupId>
 <artifactId>gameoflife</artifactId>
 <version>1.39-SNAPSHOT</version>
-<packaging>maven-plugin</packaging>
+<packaging>pom</packaging>
 <name>gameoflife</name>
 <url>https://github.com/yaichZied/gameoflife</url>
 <properties>
@@ -235,7 +235,6 @@
 		  	<groupId>maven</groupId>
 			<artifactId>maven-checkstyle-plugin</artifactId>
 			<version>3.0.1</version>
-			<type>maven-plugin</type>
 		</dependency>
 				
 		<dependency>
