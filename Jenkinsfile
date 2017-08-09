@@ -13,9 +13,7 @@ pipeline {
                     echo "M2_HOME = ${M2_HOME}"
 echo "VERSION = ${VERSION}"
                               '''
-          sh '''mvn 'clean'
-echo "$JENKINS_HOME"
-'''
+
           sh 'echo " JENKINS_HOME = ${JENKINS_HOME}"'
         }
         
@@ -31,19 +29,19 @@ echo "$JENKINS_HOME"
             recipientProviders: [[$class: 'DevelopersRecipientProvider']]
           )
           slackSend (message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})" ,color: '#FFFF00')
-          configFileProvider([configFile( fileId: 'fb0c2c4a-dc96-428e-b0c1-55937ef69479', variable: 'MAVEN_SETTINGS')]) {
+          configFileProvider([configFile( fileId: 'c775a584-3f02-4ba0-bfb1-f559bc87178d', variable: 'MAVEN_SETTINGS')]) {
             
             echo "MAVEN_SETTINGS = $MAVEN_SETTINGS"
             sh "mvn help:effective-settings"
-            sh "mvn  install"
             sh "mvn   clean"
+            sh "mvn  install -U" 
             sh "mvn  -s $MAVEN_SETTINGS deploy"
             sh """
             git config --global user.email zied.yaich5@gmail.com
             git config --global user.name yaichZied
             """
             sh "git clean -df && git reset --hard"
-            sh "mvn -s $MAVEN_SETTINGS --batch-mode release:clean release:prepare release:perform"
+            sh "mvn -s $MAVEN_SETTINGS -B release:clean release:prepare release:perform"
           }
         }
         
