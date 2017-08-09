@@ -32,7 +32,7 @@ scm:git:http://github.com/yaichZied/gameoflife.git
 </url>
   <tag>HEAD</tag>
   </scm>
-	<distributionManagement>
+	<!--<distributionManagement>
 		<repository>
 			<id>releases</id>
 			<name>SiFast Release Repository</name>
@@ -48,9 +48,9 @@ scm:git:http://github.com/yaichZied/gameoflife.git
 			<url>dav:http://192.168.1.165:8081/repository/maven-site/${project.artifactId}-${project.version}</url>
 		</site>
 	</distributionManagement>
-		
+		-->
 	
- <!-- <distributionManagement>
+  <distributionManagement>
 
 		<repository>
 			<id>maven-releases</id>
@@ -66,7 +66,7 @@ scm:git:http://github.com/yaichZied/gameoflife.git
 			<id>maven-site</id>
 			<url>dav:http://127.0.0.1:8081/repository/maven-site/${project.artifactId}-${project.version}</url>
 		</site>
-	</distributionManagement>-->
+	</distributionManagement>
 <build>
 <plugins>
 <plugin>
