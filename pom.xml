@@ -418,7 +418,7 @@
 							</plugin>
 
 			<!-- 
-			***
+			**
 			****
 			*****
 				Added -Xdoclint:none as additioanl parameters in JavaDoc Plugin into Maven-Site-plugin:3.3 
@@ -448,6 +448,31 @@
 								<artifactId>maven-jxr-plugin</artifactId>
 								<version>2.4</version>
 							</plugin>
+			<!-- 
+			***
+			****
+			*****
+				reporting fix issue attempt 
+			*****
+			****
+			***
+			-->
+							
+							
+							<plugin>
+								<groupId>org.apache.maven.plugins</groupId>
+								<artifactId>maven-checkstyle-plugin</artifactId>
+								<!--
+
+									      Use the current version to generate sample with the last features/fixes of the plugin.
+									      It implies that the current version is already deployed to generate the site.
+
+								-->
+								<version>${project.version}</version>
+							</plugin>
+							
+							
+							
 						</reportPlugins>
 					</configuration>
 				<dependencies>
