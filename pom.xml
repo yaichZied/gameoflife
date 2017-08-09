@@ -287,7 +287,7 @@
 		<build>
 			<plugins>
 			<!--  CHECKSTYLE *_* -->
-			 <plugin> 
+			<!-- <plugin> 
 			 <artifactId>maven-checkstyle-plugin</artifactId> 
 			 <version>3.0.1</version>
 			 <dependencies> 
@@ -305,7 +305,7 @@
 				</additionalparam>
 			 </configuration> 
 				 
-			 </plugin> 	
+			 </plugin>--> 	
 				<!--  PMD  -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -385,7 +385,7 @@
 				****
 				***
 				-->
-							<plugin>
+							<!--<plugin>
 								<groupId>maven</groupId>
 								<artifactId>maven-checkstyle-plugin</artifactId>
 								<version>3.0.1</version>
@@ -397,7 +397,7 @@
 									<configLocation>gol-checkstyle.xml</configLocation>
 								</configuration>
 								
-							</plugin>
+							</plugin>-->
 							<plugin>
 								<groupId>org.apache.maven.plugins</groupId>
 								<artifactId>maven-pmd-plugin</artifactId>
@@ -569,9 +569,9 @@
 	<groupId>maven</groupId>
 	<artifactId>maven-checkstyle-plugin</artifactId>
 	<version>3.0.1</version>
-	<configuration>
+	<!--<configuration>
 	<configLocation>gameoflife-build/checkstyle.xml</configLocation>
-	</configuration>
+	</configuration>-->
 	</plugin>
 	<plugin>
 	<groupId>org.codehaus.mojo</groupId>
