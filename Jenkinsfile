@@ -32,15 +32,15 @@ echo "VERSION = ${VERSION}"
             
             echo "MAVEN_SETTINGS = $MAVEN_SETTINGS"
             sh "mvn compile"
-            sh "mvn   -U clean"
-            sh "mvn  -U install "
-            sh "mvn  -s $MAVEN_SETTINGS -U deploy"
+            sh "mvn    clean -U"
+            sh "mvn  install -U  "
+            sh "mvn  -s $MAVEN_SETTINGS  deploy -U"
             sh """
             git config --global user.email zied.yaich5@gmail.com
             git config --global user.name yaichZied
             """
             sh "git clean -df && git reset --hard"
-            sh "mvn -s $MAVEN_SETTINGS -U release:clean release:prepare release:perform"
+            sh "mvn -s $MAVEN_SETTINGS release:clean release:prepare release:perform -U "
           }
         }
         
