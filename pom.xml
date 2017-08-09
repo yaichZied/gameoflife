@@ -149,7 +149,7 @@
 		<plugin>
 			<groupId>org.apache.maven.plugins</groupId>
 			<artifactId>maven-release-plugin</artifactId>
-			<version>2.5.3</version>
+			<version>2.5</version>
 			<!-- This configuration is used by Jenkins to pass arguments to Maven plugin -->
 			<configuration>
 			<preparationGoals>clean install</preparationGoals>
