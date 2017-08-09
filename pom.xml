@@ -300,11 +300,11 @@
 			 <configuration> 
 			
 			<configLocation>custom-checkstyle.xml</configLocation>
-			
-			 </configuration> 
-				 <additionalparam>
+			<additionalparam>
 					-Xdoclint:none	
 				</additionalparam>
+			 </configuration> 
+				 
 			 </plugin> 	
 				<!--  PMD  -->
 				<plugin>
@@ -391,11 +391,12 @@
 								<version>3.0.1</version>
 								
 								<configuration> 
-									<configLocation>gol-checkstyle.xml</configLocation>
-								</configuration>
-								<additionalparam>
+									<additionalparam>
 										-Xdoclint:none	
 								</additionalparam>
+									<configLocation>gol-checkstyle.xml</configLocation>
+								</configuration>
+								
 							</plugin>
 							<plugin>
 								<groupId>org.apache.maven.plugins</groupId>
