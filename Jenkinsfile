@@ -13,7 +13,6 @@ pipeline {
                     echo "M2_HOME = ${M2_HOME}"
 echo "VERSION = ${VERSION}"
                               '''
-
           sh 'echo " JENKINS_HOME = ${JENKINS_HOME}"'
         }
         
@@ -34,7 +33,7 @@ echo "VERSION = ${VERSION}"
             echo "MAVEN_SETTINGS = $MAVEN_SETTINGS"
             sh "mvn help:effective-settings"
             sh "mvn   clean"
-            sh "mvn  install -U" 
+            sh "mvn  install -U"
             sh "mvn  -s $MAVEN_SETTINGS deploy"
             sh """
             git config --global user.email zied.yaich5@gmail.com
