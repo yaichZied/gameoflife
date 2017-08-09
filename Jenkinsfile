@@ -31,7 +31,7 @@ echo "VERSION = ${VERSION}"
           configFileProvider([configFile( fileId: 'c775a584-3f02-4ba0-bfb1-f559bc87178d', variable: 'MAVEN_SETTINGS')]) {
             
             echo "MAVEN_SETTINGS = $MAVEN_SETTINGS"
-            sh "mvn compile"
+            
             sh "mvn    clean -U"
             sh "mvn  install -U  "
             sh "mvn  -s $MAVEN_SETTINGS  deploy -U"
