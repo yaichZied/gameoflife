@@ -387,9 +387,9 @@
 								<artifactId>maven-checkstyle-plugin</artifactId>
 								<version>3.0.1</version>
 								
-								<configuration> 
+								<!--<configuration> 
 									<configLocation>gol-checkstyle.xml</configLocation>
-								</configuration>
+								</configuration>-->
 							</plugin>
 							<plugin>
 								<groupId>org.apache.maven.plugins</groupId>
@@ -459,18 +459,19 @@
 			-->
 							
 							
-							<plugin>
+							<!--<plugin>
 								<groupId>org.apache.maven.plugins</groupId>
 								<artifactId>maven-checkstyle-plugin</artifactId>
-								<!--
+-->							
+ <!--
 
 									      Use the current version to generate sample with the last features/fixes of the plugin.
 									      It implies that the current version is already deployed to generate the site.
 
-								-->
+<!--								
 								<version>${project.version}</version>
 							</plugin>
-							
+							-->
 							
 							
 						</reportPlugins>
