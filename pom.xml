@@ -3,7 +3,7 @@
 <groupId>com.wakaleo.gameoflife</groupId>
 <artifactId>gameoflife</artifactId>
 <version>1.39-SNAPSHOT</version>
-<packaging>pom</packaging>
+<packaging>maven-plugin</packaging>
 <name>gameoflife</name>
 <url>https://github.com/yaichZied/gameoflife</url>
 <properties>
