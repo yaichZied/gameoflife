@@ -49,9 +49,9 @@ echo "VERSION = ${VERSION}"
     stage('SonarQube') {
       steps {
         script {
-          scannerHome = tool 'sonar'
-          withSonarQubeEnv('sonarServer') {
-            sh "${scannerHome}/bin/sonar-scanner"
+          
+          configFileProvider([configFile( fileId: 'c775a584-3f02-4ba0-bfb1-f559bc87178d', variable: 'MAVEN_SETTINGS')]) {
+            sh" mvn -s $MAVEN_SETTINGS sonar:sonar "
           }
         }
         
