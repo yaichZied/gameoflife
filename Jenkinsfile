@@ -16,6 +16,10 @@ echo "VERSION = ${VERSION}"
           sh 'echo " JENKINS_HOME = ${JENKINS_HOME}"'
         }
         
+        script {
+          sh "mvn dependency:get -X -DrepoUrl=http://admin:admin123@127.0.0.1:8081/repository/maven-releases -Dartifact=com.wakaleo.gameoflife:gameoflife-web:RELEASE:war -Dtransitive=false"
+        }
+        
       }
     }
     stage('Build') {
@@ -49,7 +53,6 @@ echo "VERSION = ${VERSION}"
     stage('SonarQube') {
       steps {
         script {
-          
           configFileProvider([configFile( fileId: 'c775a584-3f02-4ba0-bfb1-f559bc87178d', variable: 'MAVEN_SETTINGS')]) {
             sh" mvn -s $MAVEN_SETTINGS sonar:sonar "
           }
