@@ -1,6 +1,27 @@
 pipeline {
   agent any
   stages {
+     stage('Initialize Release Version') {
+      steps {
+        sh '''touch envVars.properties.groovy
+echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o SNAPSHOT | awk 'BEGIN {FS=":"}{print $1}') - 1))) > envVars.properties.groovy'''
+        load 'envVars.properties.groovy'
+        script {
+          withEnv(['REALEASE_VERSION = load \'envVars.properties.groovy\'']) {
+            echo " $RELEASE_VERSION"
+            env.RELEASE_VERSION= "$RELEASE_VERSION"
+            
+          }
+        }
+        
+        script {
+          def response = httpRequest 'http://localhost:8080/api/json?pretty=true'
+          println("Status: "+response.status)
+          println("Content: "+response.content)
+        }
+        
+      }
+    }
     stage('Initialize') {
       steps {
         timeout(time: 3, unit: 'MINUTES') {
@@ -21,7 +42,7 @@ echo "VERSION = ${VERSION}"
         }
         
         script {
-          nexusArtifactUploader artifacts: [[artifactId: 'artifact1', classifier: 'debug', file: 'com.wakaleo.gameoflife:gameoflife-web:RELEASE:war', type: 'war']], credentialsId: 'nexusLocalHostUser', groupId: 'com.wakaleo.gameoflife', nexusUrl: 'localhost:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'Nexus_SiFAST_Release_Repo', version: 'RELEASE'
+          nexusArtifactUploader artifacts: [[artifactId: 'artifact1', classifier: 'debug', file: 'com.wakaleo.gameoflife:gameoflife-web:${RELEASE_VERSION}:war', type: 'war']], credentialsId: 'nexusLocalHostUser', groupId: 'com.wakaleo.gameoflife', nexusUrl: 'localhost:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'Nexus_SiFAST_Release_Repo', version: '${RELEASE_VERSION}'
         }
         
       }
@@ -74,27 +95,7 @@ echo "VERSION = ${VERSION}"
         
       }
     }
-    stage('Delivery') {
-      steps {
-        sh '''touch envVars.properties.groovy
-echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o SNAPSHOT | awk 'BEGIN {FS=":"}{print $1}') - 1))) > envVars.properties.groovy'''
-        load 'envVars.properties.groovy'
-        script {
-          withEnv(['REALEASE_VERSION = load \'envVars.properties.groovy\'']) {
-            echo " $RELEASE_VERSION"
-            env.RELEASE_VERSION= "$RELEASE_VERSION"
-            
-          }
-        }
-        
-        script {
-          def response = httpRequest 'http://localhost:8080/api/json?pretty=true'
-          println("Status: "+response.status)
-          println("Content: "+response.content)
-        }
-        
-      }
-    }
+   
     stage('Deployement') {
       steps {
         echo 'depoying app'
