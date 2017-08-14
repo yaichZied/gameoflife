@@ -15,9 +15,11 @@ echo "VERSION = ${VERSION}"
                               '''
           sh 'echo " JENKINS_HOME = ${JENKINS_HOME}"'
         }
+        
         script {
           sh "mvn dependency:get -X -DremoteRepositories=http://admin:admin123@127.0.0.1:8081/repository/maven-releases -Dartifact=com.wakaleo.gameoflife:gameoflife-web:RELEASE:war -Dtransitive=false"
         }
+        
       }
     }
     stage('Build') {
@@ -86,8 +88,6 @@ echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o 
           println("Status: "+response.status)
           println("Content: "+response.content)
         }
-        
-        
         
       }
     }
