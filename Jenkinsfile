@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-     stage('Initialize Release Version') {
+    stage('Initialize Release Version') {
       steps {
         sh '''touch envVars.properties.groovy
 echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o SNAPSHOT | awk 'BEGIN {FS=":"}{print $1}') - 1))) > envVars.properties.groovy'''
@@ -95,7 +95,6 @@ echo "VERSION = ${VERSION}"
         
       }
     }
-   
     stage('Deployement') {
       steps {
         echo 'depoying app'
