@@ -1,45 +1,16 @@
 pipeline {
   agent any
   stages {
-    stage('Initialize Release Version') {
-      steps {
-        sh '''touch envVars.properties.groovy
-echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o SNAPSHOT | awk 'BEGIN {FS=":"}{print $1}') - 1))) > envVars.properties.groovy'''
-        load 'envVars.properties.groovy'
-        script {
-          withEnv(['REALEASE_VERSION = load \'envVars.properties.groovy\'']) {
-            echo " $RELEASE_VERSION"
-            env.RELEASE_VERSION= "$RELEASE_VERSION"
-            
-          }
-        }
-        
-        script {
-          def response = httpRequest 'http://localhost:8080/api/json?pretty=true'
-          println("Status: "+response.status)
-          println("Content: "+response.content)
-        }
-        
-      }
-    }
+   
     stage('Initialize') {
       steps {
         timeout(time: 3, unit: 'MINUTES') {
           echo 'waiting 2 seconds ....'
           sleep(unit: 'SECONDS', time: 2)
           git(poll: true, url: 'https://github.com/yaichZied/gameoflife.git', branch: '${BRANCH_NAME}', changelog: true)
-          sh '''
-                    echo "PATH = ${PATH}"
-                    echo "JENKINS_HOME = ${JENKINS_HOME}"
-                    echo "M2_HOME = ${M2_HOME}"
-echo "VERSION = ${VERSION}"
-echo "${RELEASE_VERSION}"'''
-          sh 'echo " JENKINS_HOME = ${JENKINS_HOME}"'
+   
         }
         
-        script {
-          sh "mvn dependency:get -X -DremoteRepositories=http://admin:admin123@127.0.0.1:8081/repository/maven-releases -Dartifact=com.wakaleo.gameoflife:gameoflife-web:LATEST:war -Dtransitive=false"
-        }
         
       }
     }
@@ -60,12 +31,17 @@ echo "${RELEASE_VERSION}"'''
             sh "mvn    clean -U"
             sh "mvn  install -U  "
             sh "mvn  -s $MAVEN_SETTINGS  deploy -U"
+   
             sh """
             git config --global user.email zied.yaich5@gmail.com
             git config --global user.name yaichZied
             """
             sh "git clean -df && git reset --hard"
             sh "mvn -s $MAVEN_SETTINGS release:clean release:prepare release:perform -U "
+               script {
+          sh "mvn dependency:get -X -DremoteRepositories=http://admin:admin123@127.0.0.1:8081/repository/maven-releases -Dartifact=com.wakaleo.gameoflife:gameoflife-web:LATEST:war -Dtransitive=false"
+        }
+   
           }
         }
         
