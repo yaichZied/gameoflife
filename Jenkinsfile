@@ -38,7 +38,7 @@ echo "${RELEASE_VERSION}"'''
         }
         
         script {
-          sh "mvn dependency:get -X -DremoteRepositories=http://admin:admin123@127.0.0.1:8081/repository/maven-releases -Dartifact=com.wakaleo.gameoflife:gameoflife-web:[1.50,1.55):war -Dtransitive=false"
+          sh "mvn dependency:get -X -DremoteRepositories=http://admin:admin123@127.0.0.1:8081/repository/maven-releases -Dartifact=com.wakaleo.gameoflife:gameoflife-web:LATEST:war -Dtransitive=false"
         }
         
       }
