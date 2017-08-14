@@ -60,7 +60,10 @@ echo "VERSION = ${VERSION}"
       steps {
         junit(testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true, healthScaleFactor: 1)
         archiveArtifacts(artifacts: '**/target/*.jar', fingerprint: true)
-        input 'Does this Build seems OK ?'
+        timeout(time: 1, unit: 'MINUTES') {
+          input 'Does this build seems OK ?'
+        }
+        
       }
     }
     stage('Delivery') {
@@ -80,6 +83,10 @@ echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o 
           def response = httpRequest 'http://localhost:8080/api/json?pretty=true'
           println("Status: "+response.status)
           println("Content: "+response.content)
+        }
+        
+        script {
+          sh "mvn dependency:get -X -DremoteRepositories=http://admin:admin123@127.0.0.1:8081/repository/maven-releases -Dartifact=com.wakaleo.gameoflife:gameoflife-web:RELEASE:war -Dtransitive=true"
         }
         
       }
