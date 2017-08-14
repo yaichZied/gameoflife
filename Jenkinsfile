@@ -42,7 +42,7 @@ echo "${RELEASE_VERSION}"'''
         }
         
         script {
-          nexusArtifactUploader artifacts: [[artifactId: 'artifact1', classifier: 'debug', file: 'gameoflife-web-1.55.war', type: 'war']], credentialsId: 'nexusLocalHostUser', groupId: 'com.wakaleo.gameoflife', nexusUrl: 'localhost:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'Nexus_SiFAST_Release_Repo', version: '${RELEASE_VERSION}'
+          nexusArtifactUploader artifacts: [[artifactId: 'artifact1', classifier: 'debug', file: 'gameoflife-web/1.55/gameoflife-web-1.55.war', type: 'war']], credentialsId: 'nexusLocalHostUser', groupId: 'com.wakaleo.gameoflife', nexusUrl: 'localhost:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'Nexus_SiFAST_Release_Repo', version: '${RELEASE_VERSION}'
         }
         
       }
