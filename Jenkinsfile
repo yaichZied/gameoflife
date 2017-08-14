@@ -20,6 +20,10 @@ echo "VERSION = ${VERSION}"
           sh "mvn dependency:get -X -DremoteRepositories=http://admin:admin123@127.0.0.1:8081/repository/maven-releases -Dartifact=com.wakaleo.gameoflife:gameoflife-web:RELEASE:war -Dtransitive=false"
         }
         
+        script {
+          nexusArtifactUploader artifacts: [[artifactId: 'artifact1', classifier: 'debug', file: 'com.wakaleo.gameoflife:gameoflife-web.war', type: 'war']], credentialsId: 'nexusLocalHostUser', groupId: 'com.wakaleo.gameoflife', nexusUrl: 'localhost:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'Nexus_SiFAST_Release_Repo', version: 'RELEASE'
+        }
+        
       }
     }
     stage('Build') {
