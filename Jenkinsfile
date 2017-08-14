@@ -33,7 +33,7 @@ echo  RELEASE_VERSION=$(echo $VERSION | cut -c1-$(($(echo $VERSION | grep -b -o 
                     echo "JENKINS_HOME = ${JENKINS_HOME}"
                     echo "M2_HOME = ${M2_HOME}"
 echo "VERSION = ${VERSION}"
-                              '''
+echo "${RELEASE_VERSION}"'''
           sh 'echo " JENKINS_HOME = ${JENKINS_HOME}"'
         }
         
