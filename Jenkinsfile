@@ -38,11 +38,7 @@ echo "${RELEASE_VERSION}"'''
         }
         
         script {
-          sh "mvn dependency:get -X -DremoteRepositories=http://admin:admin123@127.0.0.1:8081/repository/maven-releases -Dartifact=com.wakaleo.gameoflife:gameoflife-web:RELEASE:war -Dtransitive=false"
-        }
-        
-        script {
-          nexusArtifactUploader artifacts: [[artifactId: 'artifact1', classifier: 'debug', file: 'gameoflife-web/1.55/gameoflife-web-1.55.war', type: 'war']], credentialsId: 'nexusLocalHostUser', groupId: 'com.wakaleo.gameoflife', nexusUrl: 'localhost:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'Nexus_SiFAST_Release_Repo', version: '${RELEASE_VERSION}'
+          sh "mvn dependency:get -X -DremoteRepositories=http://admin:admin123@127.0.0.1:8081/repository/maven-releases -Dartifact=com.wakaleo.gameoflife:gameoflife-web:[1.50,1.55):war -Dtransitive=false"
         }
         
       }
