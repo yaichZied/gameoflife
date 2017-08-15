@@ -5,8 +5,8 @@ pipeline {
       steps {
         timeout(time: 3, unit: 'MINUTES') {
           git(poll: true, url: 'https://github.com/yaichZied/gameoflife.git', branch: '${BRANCH_NAME}', changelog: true)
-   
-        }  
+        }
+        
       }
     }
     stage('Build') {
@@ -19,14 +19,14 @@ pipeline {
             recipientProviders: [[$class: 'DevelopersRecipientProvider']]
           )
           slackSend (message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})" ,color: '#FFFF00')
-          configFileProvider([configFile( fileId: 'c775a584-3f02-4ba0-bfb1-f559bc87178d', variable: 'MAVEN_SETTINGS')]) {     
+          configFileProvider([configFile( fileId: 'c775a584-3f02-4ba0-bfb1-f559bc87178d', variable: 'MAVEN_SETTINGS')]) {
             sh "mvn    clean -U"
             sh "mvn  install -U  "
-            sh "mvn  -s $MAVEN_SETTINGS  deploy -U"           
+            sh "mvn  -s $MAVEN_SETTINGS  deploy -U"
             sh "git clean -df && git reset --hard"
             sh "mvn -s $MAVEN_SETTINGS release:clean release:prepare release:perform -U "
             script {
-          sh "mvn dependency:get -X -DremoteRepositories=http://admin:admin123@127.0.0.1:8081/repository/maven-releases -Dartifact=com.wakaleo.gameoflife:gameoflife-web:LATEST:war -Dtransitive=false"
+              sh "mvn dependency:get -X -DremoteRepositories=http://admin:admin123@127.0.0.1:8081/repository/maven-releases -Dartifact=com.wakaleo.gameoflife:gameoflife-web:LATEST:war -Dtransitive=false"
             }
           }
         }
