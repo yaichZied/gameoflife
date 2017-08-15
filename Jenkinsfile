@@ -8,6 +8,7 @@ pipeline {
         }
         
         sh 'env'
+        sh 'pwd()'
       }
     }
     stage('Build') {
@@ -54,11 +55,6 @@ pipeline {
         
         archiveArtifacts(artifacts: '**/target/*-infrastructure.zip', fingerprint: true)
         stash(name: 'infrastructure', includes: '**/target/*-infrastructure.zip')
-        dir(path: '/') {
-          unstash 'infrastructure'
-        }
-        
-        input 'continue'
       }
     }
     stage('Deployement') {
