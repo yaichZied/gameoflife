@@ -2,7 +2,7 @@
 <modelVersion>4.0.0</modelVersion>
 <groupId>com.wakaleo.gameoflife</groupId>
 <artifactId>gameoflife</artifactId>
-<version>1.69</version>
+<version>1.70-SNAPSHOT</version>
 <packaging>pom</packaging>
 <name>gameoflife</name>
 <url>https://github.com/yaichZied/gameoflife</url>
@@ -31,7 +31,7 @@
 	<url>
 	scm:git:http://github.com/yaichZied/gameoflife.git
 	</url>
-	<tag>gameoflife-1.69</tag>
+	<tag>HEAD</tag>
 </scm>
 	<!--<distributionManagement>
 		<repository>
