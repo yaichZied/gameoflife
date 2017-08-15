@@ -52,7 +52,7 @@ pipeline {
         }
         
         archiveArtifacts(artifacts: '**/target/*-infrastructure.zip', fingerprint: true)
-        stash(name: 'infrastructure', includes: '**/target/*-infrastructure.zip')
+        stash(name: 'infrastructure', includes: '*-infrastructure.zip', excludes: '**/target/')
       }
     }
     stage('Deployement') {
