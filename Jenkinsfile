@@ -52,11 +52,13 @@ pipeline {
         }
         
         archiveArtifacts(artifacts: '**/target/*-infrastructure.zip', fingerprint: true)
+        stash(name: 'infrastructure', includes: '**/target/*-infrastructure.zip')
       }
     }
     stage('Deployement') {
       steps {
         echo 'depoying app'
+        unstash 'infrastructure'
       }
     }
   }
