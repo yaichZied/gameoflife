@@ -8,7 +8,6 @@ pipeline {
         }
         
         sh 'env'
-        sh 'pwd()'
       }
     }
     stage('Build') {
