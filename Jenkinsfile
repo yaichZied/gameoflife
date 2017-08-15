@@ -7,6 +7,7 @@ pipeline {
           git(poll: true, url: 'https://github.com/yaichZied/gameoflife.git', branch: '${BRANCH_NAME}', changelog: true)
         }
         
+        sh 'env'
       }
     }
     stage('Build') {
@@ -58,8 +59,6 @@ pipeline {
     stage('Deployement') {
       steps {
         echo 'depoying app'
-        deleteDir()
-        cleanWs(cleanWhenSuccess: true)
         unstash 'infrastructure'
       }
     }
