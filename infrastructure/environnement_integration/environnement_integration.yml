@@ -1,0 +1,35 @@
+version: "2"
+services:
+  db:
+    container_name: mysql-socle-javaee-itg
+    image: mysql:5.7
+    restart: always 
+    ports: 
+      - 4000:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db_socle
+    networks:
+      app_net:
+        ipv4_address: 10.0.0.2
+  web:
+    container_name: tomcat-socle-javaee-itg
+    build: .
+    restart: always 
+    image: tomcat-socle-javaee:$VERSION
+    ports:
+      - 8000:8080
+    links:
+      - db
+    networks:
+      app_net:
+        ipv4_address: 10.0.0.3
+networks:
+  app_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 10.0.0.0/24
+        gateway: 10.0.0.1
+ 
