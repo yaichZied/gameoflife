@@ -6,7 +6,7 @@
 	<includeBaseDirectory>false</includeBaseDirectory>
 	<fileSets>
 		<fileSet>
-			<directory>socle-javaee-infrastructure</directory>
+			<directory>infrastructure</directory>
 		</fileSet>
 	</fileSets>
 </assembly>
