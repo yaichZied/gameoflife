@@ -27,7 +27,6 @@ pipeline {
             sh "mvn -s $MAVEN_SETTINGS release:clean release:prepare release:perform -U "
             script {
               sh "mvn dependency:get -X -DremoteRepositories=http://admin:admin123@127.0.0.1:8081/repository/maven-releases -Dartifact=com.wakaleo.gameoflife:gameoflife-web:RELEASE:war -Dtransitive=false"
-              sh "mvn dependency:get -X -DremoteRepositories=http://admin:admin123@127.0.0.1:8081/repository/maven-releases -DgroupId=com.wakaleo.gameoflife -DartifactId=gameoflife-1.59-infrastructure -Dversion=1.59 -Dpackaging=zip -Dclassifier=sources -Dtransitive=false"
             }
           }
         }
@@ -52,6 +51,7 @@ pipeline {
           input 'Does this build seems OK ?'
         }
         
+        archiveArtifacts(artifacts: '**/target/*-infrastructure.zip', fingerprint: true)
       }
     }
     stage('Deployement') {
