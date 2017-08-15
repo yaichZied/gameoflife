@@ -52,12 +52,14 @@ pipeline {
         }
         
         archiveArtifacts(artifacts: '**/target/*-infrastructure.zip', fingerprint: true)
-        stash(name: 'infrastructure', includes: '*-infrastructure.zip', excludes: '**/target/')
+        stash(name: 'infrastructure', includes: '**/target/*-infrastructure.zip')
       }
     }
     stage('Deployement') {
       steps {
         echo 'depoying app'
+        deleteDir()
+        cleanWs(cleanWhenSuccess: true)
         unstash 'infrastructure'
       }
     }
