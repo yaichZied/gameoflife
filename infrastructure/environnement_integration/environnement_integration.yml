@@ -1,26 +1,12 @@
 version: "2"
 services:
-  db:
-    container_name: mysql-socle-javaee-itg
-    image: mysql:5.7
-    restart: always 
-    ports: 
-      - 4000:3306
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: db_socle
-    networks:
-      app_net:
-        ipv4_address: 10.0.0.2
   web:
-    container_name: tomcat-socle-javaee-itg
+    container_name: gameoflifeContainer
     build: .
     restart: always 
-    image: tomcat-socle-javaee:$VERSION
+    image: gameoflifeImage:$VERSION
     ports:
-      - 8000:8080
-    links:
-      - db
+      - 8002:8082
     networks:
       app_net:
         ipv4_address: 10.0.0.3
