@@ -8,17 +8,20 @@ pipeline {
         }
         
         sh 'env'
+        cloudshareDockerMachine(name: 'fezfz', expiryDays: 5) {
+          sleep 2
+        }
+        
+        dockerNode(image: 'odod') {
+          sleep 5
+        }
+        
       }
     }
     stage('Build') {
       steps {
         script {
-          emailext (
-            subject: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-            body: """<p>STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
-            <p>Check console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p>""",
-            recipientProviders: [[$class: 'DevelopersRecipientProvider']]
-          )
+          
           slackSend (message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})" ,color: '#FFFF00')
           configFileProvider([configFile( fileId: 'c775a584-3f02-4ba0-bfb1-f559bc87178d', variable: 'MAVEN_SETTINGS')]) {
             sh "mvn    clean -U"
