@@ -8,12 +8,11 @@ pipeline {
         }
         
         sh 'env'
-       }
+      }
     }
     stage('Build') {
       steps {
         script {
-          
           slackSend (message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})" ,color: '#FFFF00')
           configFileProvider([configFile( fileId: 'c775a584-3f02-4ba0-bfb1-f559bc87178d', variable: 'MAVEN_SETTINGS')]) {
             sh "mvn    clean -U"
@@ -56,7 +55,7 @@ pipeline {
       steps {
         echo 'depoying app'
         unstash 'infrastructure'
-        sh "scp .m2/repository/com/wakaleo/gameoflife/gameoflife-web/1.71/*.war evaneos@172.17.0.1:/home/evaneos/docker-dockerGameoflife/livraison/gameoflife/"
+        sh 'scp .m2/repository/com/wakaleo/gameoflife/gameoflife-web/1.71/*.war evaneos@172.17.0.1:/home/evaneos/docker-dockerGameoflife/livraison/gameoflife/'
       }
     }
   }
