@@ -8,15 +8,7 @@ pipeline {
         }
         
         sh 'env'
-        cloudshareDockerMachine(name: 'fezfz', expiryDays: 5) {
-          sleep 2
-        }
-        
-        dockerNode(image: 'odod') {
-          sleep 5
-        }
-        
-      }
+       }
     }
     stage('Build') {
       steps {
@@ -52,7 +44,7 @@ pipeline {
         junit(testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true, healthScaleFactor: 1)
         archiveArtifacts(artifacts: '**/target/*.jar', fingerprint: true)
         timeout(time: 1, unit: 'HOURS') {
-          input 'Does this build seems OK ?'
+          input 'Does this bu.ild seems OK ?'
         }
         
         archiveArtifacts(artifacts: '**/target/*-infrastructure.zip', fingerprint: true)
@@ -64,6 +56,7 @@ pipeline {
       steps {
         echo 'depoying app'
         unstash 'infrastructure'
+        sh "scp .m2/repository/com/wakaleo/gameoflife/gameoflife-web/1.71/*.war evaneos@172.17.0.1:/home/evaneos/docker-dockerGameoflife/livraison/gameoflife/"
       }
     }
   }
