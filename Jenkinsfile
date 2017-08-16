@@ -54,6 +54,7 @@ pipeline {
         
         archiveArtifacts(artifacts: '**/target/*-infrastructure.zip', fingerprint: true)
         stash(name: 'infrastructure', includes: '**/target/*-infrastructure.zip')
+        input 'go'
       }
     }
     stage('Deployement') {
