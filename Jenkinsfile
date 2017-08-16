@@ -55,8 +55,7 @@ pipeline {
       steps {
         echo 'depoying app'
         unstash 'infrastructure'
-        sh 'scp .m2/repository/com/wakaleo/gameoflife/gameoflife-web/1.71/*.war evaneos@172.17.0.1:/home/evaneos/docker-dockerGameoflife/livraison/gameoflife/'
-      }
+          }
     }
   }
   tools {
