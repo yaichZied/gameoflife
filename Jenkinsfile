@@ -48,13 +48,19 @@ pipeline {
         
         archiveArtifacts(artifacts: '**/target/*-infrastructure.zip', fingerprint: true)
         stash(name: 'infrastructure', includes: '**/target/*-infrastructure.zip')
-        input 'go'
       }
     }
     stage('Deployement') {
       steps {
         echo 'depoying app'
         unstash 'infrastructure'
+        sh '''cp /var/lib/jenkins/.m2/repository/com/wakaleo/gameoflife/gameoflife-web/1.74/gameoflife-web-1.74.war  .			
+'''
+        sh '''cp /target/*-infrastructure.zip .
+
+'''
+        sh '''VERSION=1.75 docker-compose --project-name socle-javaee-rec -f infrastructure/environnement_recette/environnement_recette.yml up --build -d
+'''
       }
     }
   }
