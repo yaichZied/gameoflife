@@ -4,7 +4,7 @@ services:
     container_name: gameoflifeContainerRec
     build: .
     restart: always 
-    image: gameoflifeContainer:$VERSION
+    image: containergameoflife:$VERSION
     ports:
       - 8013:8082
     networks:
