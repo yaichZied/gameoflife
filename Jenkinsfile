@@ -55,7 +55,7 @@ pipeline {
       steps {
         echo 'depoying app'
         unstash 'infrastructure'
-          }
+      }
     }
   }
   tools {
