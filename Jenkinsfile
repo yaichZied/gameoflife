@@ -60,7 +60,10 @@ pipeline {
 
 '''
         sh 'unzip -o -j /*-infrastructure.zip "infrastructure/environnement_recette/*"'
-        sh '''VERSION=1.78 docker-compose --project-name socle-javaee-rec -f infrastructure/environnement_recette/environnement_recette.yml up --build -d
+        sh 'VERSION=1.78 '
+        sh '''cd infrastructure/environnement_recette/
+'''
+        sh '''docker-compose --project-name socle-javaee-rec -f environnement_recette.yml up --build -d
 '''
       }
     }
