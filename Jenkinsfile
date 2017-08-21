@@ -54,7 +54,7 @@ pipeline {
       steps {
         echo 'depoying app'
         unstash 'infrastructure'
-        sh '''cp /var/lib/jenkins/.m2/repository/com/wakaleo/gameoflife/gameoflife-web/1.84/gameoflife-web-1.84.war  .			
+        sh '''cp /var/lib/jenkins/.m2/repository/com/wakaleo/gameoflife/gameoflife-web/1.85/gameoflife-web-1.85.war  .			
 '''
         sh '''cp ./target/*-infrastructure.zip .
 
@@ -63,7 +63,7 @@ pipeline {
 
 docker-compose --project-name socle-javaee-rec -f environnement_recette.yml down -v
 '''
-        sh 'VERSION=1.84'
+        sh 'VERSION=1.85'
         sh '''docker-compose --project-name socle-javaee-rec -f infrastructure/environnement_recette/environnement_recette.yml up --build -d
 '''
       }
