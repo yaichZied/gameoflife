@@ -10,7 +10,7 @@ pipeline {
         sh 'env'
       }
     }
-    stage('Build & Deployment') {
+    stage('Packaging') {
       steps {
         script {
           slackSend (message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})" ,color: '#FFFF00')
@@ -44,7 +44,7 @@ pipeline {
         
       }
     }
-    stage('Deployment') {
+    stage('Delivery') {
       steps {
         script {
           configFileProvider([configFile( fileId: 'c775a584-3f02-4ba0-bfb1-f559bc87178d', variable: 'MAVEN_SETTINGS')]) {
@@ -56,7 +56,7 @@ pipeline {
         
       }
     }
-    stage('Docker') {
+    stage('Deployment') {
       steps {
         echo 'depoying app'
         sh '''cp /var/lib/jenkins/.m2/repository/com/wakaleo/gameoflife/gameoflife-web/${VERSION}/gameoflife-web-${VERSION}.war  ./infrastructure/environnement_recette/			
