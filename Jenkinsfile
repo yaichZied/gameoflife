@@ -6,6 +6,7 @@ pipeline {
         timeout(time: 3, unit: 'MINUTES') {
           git(poll: true, url: 'https://github.com/yaichZied/gameoflife.git', branch: '${BRANCH_NAME}', changelog: true)
         }
+        
         sh 'env'
       }
     }
@@ -32,24 +33,25 @@ pipeline {
         
       }
     }
-    
     stage('Report') {
       steps {
         junit(testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true, healthScaleFactor: 1)
-        archiveArtifacts(artifacts: '**/target/*.jar', fingerprint: true)    
+        archiveArtifacts(artifacts: '**/target/*.jar', fingerprint: true)
         archiveArtifacts(artifacts: '**/target/*-infrastructure.zip', fingerprint: true)
         timeout(time: 1, unit: 'HOURS') {
-           input 'Do you want proceed to the delivery ?'
-        } 
+          input 'Do you want proceed to the delivery ?'
+        }
+        
       }
     }
     stage('Deployment') {
       steps {
-            sh "git clean -df && git reset --hard"
-            sh "mvn -s $MAVEN_SETTINGS release:clean release:prepare release:perform -U "
-            script {
-              sh "mvn dependency:get -X -DremoteRepositories=http://admin:admin123@127.0.0.1:8081/repository/maven-releases -Dartifact=com.wakaleo.gameoflife:gameoflife-web:RELEASE:war -Dtransitive=false"
-            }
+        sh 'git clean -df && git reset --hard'
+        sh '"mvn -s $MAVEN_SETTINGS release:clean release:prepare release:perform -U "'
+        script {
+          sh "mvn dependency:get -X -DremoteRepositories=http://admin:admin123@127.0.0.1:8081/repository/maven-releases -Dartifact=com.wakaleo.gameoflife:gameoflife-web:RELEASE:war -Dtransitive=false"
+        }
+        
       }
     }
     stage('Docker') {
