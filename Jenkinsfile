@@ -86,4 +86,15 @@ docker-compose --project-name socle-javaee-rec -f environnement_recette.yml down
     buildDiscarder(logRotator(numToKeepStr: '10'))
     timeout(time: 60, unit: 'MINUTES')
   }
+  post {
+    success {
+      slackSend (message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})" ,color: '#FFFF00')
+    }
+    
+    failure {
+      slackSend (message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})" ,color: '#FF0000')
+    }
+  }
+  
+  
 }
