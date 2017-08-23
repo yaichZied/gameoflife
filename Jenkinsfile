@@ -8,7 +8,6 @@ pipeline {
         }
         
         sh 'env'
-        input 'correct ?'
       }
     }
     stage('Build') {
@@ -55,8 +54,9 @@ pipeline {
       steps {
         echo 'depoying app'
         unstash 'infrastructure'
-        sh '''cp /var/lib/jenkins/.m2/repository/com/wakaleo/gameoflife/gameoflife-web/2.1/gameoflife-web-2.1.war  ./infrastructure/environnement_recette/			
-'''
+        sh '''cp /var/lib/jenkins/.m2/repository/com/wakaleo/gameoflife/gameoflife-web/${VERSION}/gameoflife-web-${VERSION}.war  ./infrastructure/environnement_recette/			
+
+mv infrastructure/environnement_recette/*.war infrastructure/environnement_recette/gameoflife-web.war'''
         sh '''cp ./target/*-infrastructure.zip .
 
 '''
@@ -64,7 +64,7 @@ pipeline {
 
 docker-compose --project-name socle-javaee-rec -f environnement_recette.yml down -v
 '''
-        sh 'VERSION=2.1'
+        sh 'VERSION=${VERSION}'
         sh '''docker-compose --project-name socle-javaee-rec -f infrastructure/environnement_recette/environnement_recette.yml up --build -d
 '''
       }
