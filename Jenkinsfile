@@ -46,8 +46,8 @@ pipeline {
     }
     stage('Deployment') {
       steps {
-        sh 'git clean -df && git reset --hard'
         configFileProvider([configFile( fileId: 'c775a584-3f02-4ba0-bfb1-f559bc87178d', variable: 'MAVEN_SETTINGS')]) {
+          sh 'git clean -df && git reset --hard'
           sh '"mvn -s $MAVEN_SETTINGS release:clean release:prepare release:perform -U "'
         }
         script {
