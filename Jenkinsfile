@@ -13,7 +13,6 @@ pipeline {
     stage('Packaging') {
       steps {
         script {
-          slackSend (message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})" ,color: '#FFFF00')
           configFileProvider([configFile( fileId: 'c775a584-3f02-4ba0-bfb1-f559bc87178d', variable: 'MAVEN_SETTINGS')]) {
             sh "mvn    clean -U"
             sh "mvn  install -U  "
@@ -81,18 +80,6 @@ docker-compose --project-name socle-javaee-rec -f environnement_recette.yml down
   }
   environment {
     VERSION = readMavenPom().getVersion().replace("-SNAPSHOT","")
-  }
-  post {
-    success {
-      slackSend(message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})", color: '#FFFF00')
-      
-    }
-    
-    failure {
-      slackSend(message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})", color: '#FF0000')
-      
-    }
-    
   }
   options {
     buildDiscarder(logRotator(numToKeepStr: '10'))
