@@ -46,13 +46,14 @@ pipeline {
     }
     stage('Deployment') {
       steps {
-          script {
+        script {
           configFileProvider([configFile( fileId: 'c775a584-3f02-4ba0-bfb1-f559bc87178d', variable: 'MAVEN_SETTINGS')]) {
-          sh 'git clean -df && git reset --hard'
-          sh '"mvn -s $MAVEN_SETTINGS release:clean release:prepare release:perform -U "'
-          sh "mvn dependency:get -X -DremoteRepositories=http://admin:admin123@127.0.0.1:8081/repository/maven-releases -Dartifact=com.wakaleo.gameoflife:gameoflife-web:RELEASE:war -Dtransitive=false"
+            sh 'git clean -df && git reset --hard'
+            sh '"mvn -s $MAVEN_SETTINGS release:clean release:prepare release:perform -U "'
+            sh "mvn dependency:get -X -DremoteRepositories=http://admin:admin123@127.0.0.1:8081/repository/maven-releases -Dartifact=com.wakaleo.gameoflife:gameoflife-web:RELEASE:war -Dtransitive=false"
           }
         }
+        
       }
     }
     stage('Docker') {
