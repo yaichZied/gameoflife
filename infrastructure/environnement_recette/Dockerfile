@@ -6,4 +6,3 @@ ADD settings.xml /usr/local/tomcat/conf/
 ADD tomcat-users.xml /usr/local/tomcat/conf/
 
 CMD ["catalina.sh", "run"]
-CMD ["mvn", "jetty:run"]
