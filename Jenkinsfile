@@ -75,7 +75,7 @@ docker-compose --project-name socle-javaee-rec -f environnement_recette.yml down
     jdk 'jdk8'
   }
   environment {
-    VERSION = readMavenPom().getVersion().replace("-SNAPSHOT"," ")
+    VERSION = readMavenPom().getVersion().replace("-SNAPSHOT","")
   }
   options {
     buildDiscarder(logRotator(numToKeepStr: '10'))
