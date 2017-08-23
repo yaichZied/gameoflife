@@ -77,7 +77,7 @@ docker-compose --project-name socle-javaee-rec -f environnement_recette.yml down
   }
   tools {
     maven 'Maven 3.3.9'
-    jdk 'jdk8'
+    jdk 'jdk7'
   }
   environment {
     VERSION = readMavenPom().getVersion().replace("-SNAPSHOT","")
