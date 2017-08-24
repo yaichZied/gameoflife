@@ -32,8 +32,6 @@ mv infrastructure/environnement_integration/*.war infrastructure/environnement_i
 
 '''
         sh '''unzip -o -j /*-infrastructure.zip "infrastructure/environnement_integration/*"
-
-docker-compose --project-name socle-javaee-snapshot -f environnement_integration.yml down -v
 '''
         sh 'VERSION=${VERSION}'
       }
@@ -82,7 +80,6 @@ mv infrastructure/environnement_recette/*.war infrastructure/environnement_recet
 '''
         sh '''unzip -o -j /*-infrastructure.zip "infrastructure/environnement_recette/*"
 
-docker-compose --project-name socle-javaee-rec -f environnement_recette.yml down -v
 '''
         sh 'VERSION=${VERSION}'
       }
