@@ -19,7 +19,8 @@ pipeline {
             sh "mvn  install -U  "
             sh "mvn  -s $MAVEN_SETTINGS  deploy -U"
           }
-        }    
+        }
+        
       }
     }
     stage('SNAPSHOT Deployment') {
@@ -39,7 +40,6 @@ docker-compose --project-name socle-javaee-snapshot -f environnement_integration
 '''
       }
     }
-    
     stage('SonarQube') {
       steps {
         script {
