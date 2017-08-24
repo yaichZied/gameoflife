@@ -6,7 +6,7 @@ services:
     restart: always 
     image: containergameoflife:$VERSION
     ports:
-      - 8013:8082
+      - 8013:8080
     networks:
       app_net:
         ipv4_address: 10.0.1.3
