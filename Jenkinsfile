@@ -23,7 +23,7 @@ pipeline {
         
       }
     }
-    stage('SNAPSHOT Deployment') {
+    stage('Integration Deployment') {
       steps {
         sh '''cp /var/lib/jenkins/.m2/repository/com/wakaleo/gameoflife/gameoflife-web/${VERSION}-SNAPSHOT/gameoflife-web-${VERSION}-SNAPSHOT.war  ./infrastructure/environnement_integration/			
 
