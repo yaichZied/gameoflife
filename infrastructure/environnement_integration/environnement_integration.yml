@@ -4,7 +4,7 @@ services:
     container_name: gameoflifeContainer
     build: .
     restart: always 
-    image: gameoflifeSnapshot:$VERSION
+    image: gameoflifesnapshot:$VERSION
     ports:
       - 8003:8080
     networks:
