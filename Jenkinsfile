@@ -40,7 +40,6 @@ docker-compose --project-name socle-javaee-snapshot -f environnement_integration
 '''
       }
     }
-
     stage('SonarQube') {
       steps {
         script {
