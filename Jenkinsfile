@@ -23,6 +23,24 @@ pipeline {
         
       }
     }
+    stage('SNAPSHOT Deployment') {
+      steps {
+        sh '''cp /var/lib/jenkins/.m2/repository/com/wakaleo/gameoflife/gameoflife-web/${VERSION}-SNAPSHOT/gameoflife-web-${VERSION}-SNAPSHOT.war  ./infrastructure/environnement_integration/			
+
+mv infrastructure/environnement_integration/*.war infrastructure/environnement_integration/gameoflife-web.war'''
+        sh '''cp ./target/*-infrastructure.zip .
+
+'''
+        sh '''unzip -o -j /*-infrastructure.zip "infrastructure/environnement_integration/*"
+
+docker-compose --project-name socle-javaee-snapshot -f environnement_integration.yml down -v
+'''
+        sh 'VERSION=${VERSION}'
+        sh '''docker-compose --project-name socle-javaee-snapshot -f infrastructure/environnement_integration/environnement_integration.yml up --build -d
+'''
+      }
+    }
+
     stage('SonarQube') {
       steps {
         script {
