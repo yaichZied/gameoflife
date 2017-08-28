@@ -8,7 +8,7 @@ pipeline {
         }
         
         sh 'env'
-        library 'gameoflife_notification_shared_library@blog/declarative/notifications'
+        library 'gameoflife_notification_shared_library'
       }
     }
     stage('Packaging') {
