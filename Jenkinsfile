@@ -1,3 +1,6 @@
+#!groovy
+@Library('gameoflife_notification_shared_library@blog/declarative/notifications') _
+
 pipeline {
   agent any
   stages {
