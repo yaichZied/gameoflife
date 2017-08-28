@@ -103,7 +103,9 @@ docker-compose --project-name socle-javaee-rec -f environnement_recette.yml down
   post {
     always {
       sendNotifications currentBuild.result
+      
     }
+    
   }
   options {
     buildDiscarder(logRotator(numToKeepStr: '10'))
