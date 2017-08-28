@@ -14,7 +14,7 @@ pipeline {
     stage('Packaging') {
       steps {
         script {
-          slackSend (message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})" ,color: '#FFFF00')
+          sendNotifications 'STARTED'
           configFileProvider([configFile( fileId: 'c775a584-3f02-4ba0-bfb1-f559bc87178d', variable: 'MAVEN_SETTINGS')]) {
             sh "mvn    clean -U"
             sh "mvn  install -U  "
