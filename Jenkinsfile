@@ -115,8 +115,7 @@ docker-compose --project-name socle-javaee-rec -f environnement_recette.yml down
     buildDiscarder(logRotator(numToKeepStr: '10'))
     timeout(time: 60, unit: 'MINUTES')
   }
-  #!groovy
-@Library('gameoflife_notification_shared_library@blog/declarative/notifications')
+  @Library('gameoflife_notification_shared_library@blog/declarative/notifications')
 
 
 }
