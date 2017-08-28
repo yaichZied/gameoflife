@@ -1,3 +1,5 @@
+@Library('gameoflife_notification_shared_library@blog/declarative/notifications')
+
 pipeline {
   agent any
   stages {
@@ -8,8 +10,7 @@ pipeline {
         }
         
         sh 'env'
-        libraryResource 'gameoflife_notification_shared_library@blog/declarative/notifications'
-      }
+       }
     }
     stage('Packaging') {
       steps {
