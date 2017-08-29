@@ -9,7 +9,8 @@ pipeline {
         
         sh 'env'
         library 'gameoflife_notification_shared_library'
-      }
+          input 'Do you want proceed ?'
+        }
     }
     stage('Packaging') {
       steps {
@@ -101,9 +102,11 @@ docker-compose --project-name socle-javaee-rec -f environnement_recette.yml down
     VERSION = readMavenPom().getVersion().replace("-SNAPSHOT","")
   }
   post {
+    aborted{
+        currentBuild.result = 'SUCCESSFUL'
+    }
     always {
-      sendNotifications currentBuild.result
-      
+      sendNotifications currentBuild.result 
     }
     
   }
