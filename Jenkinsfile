@@ -9,7 +9,7 @@ pipeline {
         
         sh 'env'
         library 'gameoflife_notification_shared_library'
-          input 'Do you want proceed ?'
+       
         }
     }
     stage('Packaging') {
@@ -58,7 +58,7 @@ docker-compose --project-name socle-javaee-snapshot -f environnement_integration
         archiveArtifacts(artifacts: '**/target/*.jar', fingerprint: true)
         archiveArtifacts(artifacts: '**/target/*-infrastructure.zip', fingerprint: true)
         timeout(time: 1, unit: 'HOURS') {
-          input 'Do you want proceed to the delivery ?'
+          input 'Do you want proceed to the delivery?'
         }
         
       }
@@ -102,9 +102,6 @@ docker-compose --project-name socle-javaee-rec -f environnement_recette.yml down
     VERSION = readMavenPom().getVersion().replace("-SNAPSHOT","")
   }
   post {
-    aborted{
-        currentBuild.result = 'SUCCESS'
-    }
     always {
       sendNotifications currentBuild.result 
     }
