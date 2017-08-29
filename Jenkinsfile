@@ -103,7 +103,7 @@ docker-compose --project-name socle-javaee-rec -f environnement_recette.yml down
   }
   post {
     aborted{
-        currentBuild.result = 'SUCCESSFUL'
+        currentBuild.result = 'SUCCESS'
     }
     always {
       sendNotifications currentBuild.result 
