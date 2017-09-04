@@ -9,8 +9,7 @@ pipeline {
         
         sh 'env'
         library 'gameoflife_notification_shared_library'
-       
-        }
+      }
     }
     stage('Packaging') {
       steps {
@@ -103,7 +102,8 @@ docker-compose --project-name socle-javaee-rec -f environnement_recette.yml down
   }
   post {
     always {
-      sendNotifications currentBuild.result 
+      sendNotifications currentBuild.result
+      
     }
     
   }
